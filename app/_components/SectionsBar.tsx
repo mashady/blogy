@@ -38,16 +38,21 @@ const SECTION_LINKS: any = [
 
 const SectionsBar = () => {
   return (
-    <div className="bg-sec py-2 text-white">
-      <div className="container mx-auto">
-        <div className="py-2 flex">
-          {SECTION_LINKS.map((section: any) => (
-            <div key={section.name} className="pr-[16px]">
-              <Link href={section.link} className="  text  hover:bg-opacity-50">
-                {section.name}
-              </Link>
-            </div>
-          ))}
+    <div className="bg-sec py-2 text-white overflow-hidden">
+      <div className="max-w-[1280px] mx-auto px-4">
+        <div className="">
+          <div className="py-2 flex">
+            {SECTION_LINKS.map((section: any) => (
+              <div key={section.name} className="pr-[16px]">
+                <Link
+                  href={section.link}
+                  className="text truncate text-[14px] md:text-[16px] hover:bg-opacity-50"
+                >
+                  {section.name}
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

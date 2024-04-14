@@ -5,12 +5,12 @@ import SectionsBar from "./SectionsBar";
 const Navbar = () => {
   return (
     <>
-      <div className="container mx-auto">
+      <div className="max-w-[1280px] mx-auto px-4">
         <nav className="h-[90px] flex items-center justify-between">
           <div className="font-semibold text-xl text-main dark:text-white">
             <Link href="/">blogy</Link>
           </div>
-          <div className="text-lg">
+          <div className="text-[14px] md:text-[16px] font-semibold">
             <button>
               <Link href="/sign-in">Sign In</Link>
             </button>

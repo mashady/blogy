@@ -25,7 +25,7 @@ const Post = () => {
   let POST_IMAGE_PLACEHOLDER: string =
     "https://i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2024/04/siri-dumpster-fire-1.jpg?w=1500&quality=82&strip=all&ssl=1";
   return (
-    <div className="container mx-auto">
+    <div className="max-w-[1280px] mx-auto px-4">
       <div className="mt-6">
         <div>
           <ul className="py-4">
@@ -112,14 +112,14 @@ const Post = () => {
               <h2 className="text-3xl font-bold">COMMENTS</h2>
 
               <form className="my-6">
-                <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
+                <label className="mb-2 text-sm font-medium sr-only dark:text-white">
                   leave your comment
                 </label>
                 <div className="relative">
                   <input
                     type="comment"
                     id="comment"
-                    className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-white dark:border-gray-600 dark:placeholder-black dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
+                    className="block w-full p-4 ps-10 text-sm text-gray-900 border placeholder-black focus:placeholder-gray-400 border-black rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-white dark:border-gray-600 dark:placeholder-black dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
                     placeholder="leave your comment..."
                     required
                   />
