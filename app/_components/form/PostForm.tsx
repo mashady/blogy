@@ -1,0 +1,103 @@
+"use client";
+
+import { useState } from "react";
+import SelectInput from "../SelectInput";
+import TagsInput from "../Tags Inputs/TagsInput";
+import SimpleMDE from "react-simplemde-editor";
+import { useForm, Controller } from "react-hook-form";
+import { z } from "zod";
+
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { postSchema } from "@/app/ValidationSchemas";
+
+import "easymde/dist/easymde.min.css";
+import Tiptab from "../Tiptab/Tiptab";
+
+type PostFormData = z.infer<typeof postSchema>;
+
+const PostForm = ({ post }: any) => {
+  const router = useRouter();
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<PostFormData>({
+    resolver: zodResolver(postSchema),
+  });
+  const [error, setError] = useState("");
+  const [isSubmitting, setSubmitting] = useState(false);
+
+  const onSubmit = handleSubmit((data) => {
+    console.log(data);
+    console.log(errors);
+    console.log("submitted");
+  });
+
+  const selectedTags = (tags: any) => {
+    console.log(tags);
+  };
+  return (
+    <>
+      <div className="max-w-[1280px] mx-auto px-4 mt-8">
+        <div className="max-w-xl">
+          <form className="space-y-3 mb-6" onSubmit={onSubmit}>
+            <input
+              className="bg-gray-200 text-gray-700 placeholder-gray-700 outline-none rounded p-2 w-full mt-2"
+              type="text"
+              value={post?.title}
+              {...register("title")}
+              placeholder="Name your title"
+            />
+            <span>{errors.title?.message}</span>
+            <input
+              className="bg-gray-200 text-gray-700 placeholder-gray-700 outline-none rounded p-2 w-full mt-2"
+              type="text"
+              {...register("slug")}
+              value={post?.slug}
+              placeholder="Write your own link slug"
+            />
+            <input
+              className="bg-gray-200 text-gray-700 placeholder-gray-700 outline-none rounded p-2 w-full mt-2"
+              type="text"
+              {...register("cover")}
+              value={post?.cover}
+              placeholder="Put your own cover link ex: http://example.com"
+            />
+            <SelectInput />
+            <TagsInput selectedTags={selectedTags} tagsP={[]} />
+            <Tiptab />
+            {/**
+             * <Controller
+              name="description"
+              control={control}
+              defaultValue={post?.description}
+              render={({ field }) => (
+                <SimpleMDE placeholder="Description" {...field} />
+              )}
+            />
+             * 
+             * 
+             */}
+
+            <button
+              className="flex items-center justify-between gap-3 bg-[#1f4d78] text-white rounded w-full h-[50px] px-4"
+              disabled={isSubmitting}
+            >
+              {post ? "Update Post" : "Submit New Post"}{" "}
+              {isSubmitting && (
+                <div className="inline-flex">
+                  <span className="loader"></span>
+                </div>
+              )}
+            </button>
+          </form>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default PostForm;

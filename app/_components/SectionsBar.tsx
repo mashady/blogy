@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import DarkModeToggler from "./dark mode/DarkModeToggler";
 
 const SECTION_LINKS: any = [
   {
@@ -41,17 +42,21 @@ const SectionsBar = () => {
     <div className="bg-sec py-2 text-white overflow-hidden">
       <div className="max-w-[1280px] mx-auto px-4">
         <div className="">
-          <div className="py-2 flex">
-            {SECTION_LINKS.map((section: any) => (
-              <div key={section.name} className="pr-[16px]">
-                <Link
-                  href={section.link}
-                  className="text truncate text-[14px] md:text-[16px] hover:bg-opacity-50"
-                >
-                  {section.name}
-                </Link>
-              </div>
-            ))}
+          <div className=" flex justify-between items-center">
+            <div className="flex py-2">
+              {SECTION_LINKS.map((section: any) => (
+                <div key={section.name} className="pr-[16px]">
+                  <Link
+                    href={section.link}
+                    className="text truncate text-[14px] md:text-[16px] hover:bg-opacity-50"
+                  >
+                    {section.name}
+                  </Link>
+                </div>
+              ))}
+            </div>
+
+            <DarkModeToggler />
           </div>
         </div>
       </div>

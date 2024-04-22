@@ -1,0 +1,23 @@
+import { z } from "zod";
+
+export const postSchema = z.object({
+  title: z.string().min(1, "title is required").max(255),
+  slug: z.string().min(1, "slug is required").max(255),
+  cover: z.string().url().min(1, "cover is required"),
+  //section: z.string().min(1, "section is required").max(255),
+  //tags: z.string().min(1, "section is required").max(255),
+  //description: z.string().min(1, "Description is required.").max(65535),
+});
+
+export const updatePostSchema = z.object({
+  title: z.string().min(1, "title is required").max(255).optional(),
+  slug: z.string().min(1, "slug is required").max(255).optional(),
+  cover: z.string().url().min(1, "cover is required").optional(),
+  section: z.string().min(1, "section is required").max(255).optional(),
+  tags: z.string().min(1, "section is required").max(255).optional(),
+  description: z
+    .string()
+    .min(1, "Description is required.")
+    .max(65535)
+    .optional(),
+});
