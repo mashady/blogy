@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import SelectInput from "../SelectInput";
 import TagsInput from "../Tags Inputs/TagsInput";
-import SimpleMDE from "react-simplemde-editor";
 import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 
@@ -11,9 +10,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { postSchema } from "@/app/ValidationSchemas";
-
 import "easymde/dist/easymde.min.css";
-import Tiptab from "../Tiptab/Tiptab";
+import SimpleMDE from "react-simplemde-editor";
 
 type PostFormData = z.infer<typeof postSchema>;
 
@@ -23,6 +21,7 @@ const PostForm = ({ post }: any) => {
     register,
     control,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<PostFormData>({
     resolver: zodResolver(postSchema),
@@ -30,20 +29,44 @@ const PostForm = ({ post }: any) => {
   const [error, setError] = useState("");
   const [isSubmitting, setSubmitting] = useState(false);
 
-  const onSubmit = handleSubmit((data) => {
+  const onSubmit = handleSubmit((data, e) => {
+    e?.preventDefault();
     console.log(data);
-    console.log(errors);
     console.log("submitted");
   });
 
   const selectedTags = (tags: any) => {
-    console.log(tags);
+    // just take first tag
+    setValue("tags", tags[0], { shouldValidate: true });
   };
+  const sectionSelected = (value: any) => {
+    console.log(value);
+
+    setValue("section", value, { shouldValidate: true });
+  };
+  const preventEnterKeySubmission = (
+    e: React.KeyboardEvent<HTMLFormElement>
+  ) => {
+    const target = e.target;
+    if (e.key === "Enter" && target instanceof HTMLInputElement) {
+      e.preventDefault();
+    }
+  };
+  const autofocusNoSpellcheckerOptions = useMemo(() => {
+    return {
+      autofocus: true,
+      spellChecker: false,
+    } as SimpleMDE.Options;
+  }, []);
   return (
     <>
       <div className="max-w-[1280px] mx-auto px-4 mt-8">
         <div className="max-w-xl">
-          <form className="space-y-3 mb-6" onSubmit={onSubmit}>
+          <form
+            className="space-y-3 mb-6"
+            onSubmit={onSubmit}
+            onKeyDown={preventEnterKeySubmission}
+          >
             <input
               className="bg-gray-200 text-gray-700 placeholder-gray-700 outline-none rounded p-2 w-full mt-2"
               type="text"
@@ -59,6 +82,7 @@ const PostForm = ({ post }: any) => {
               value={post?.slug}
               placeholder="Write your own link slug"
             />
+            <span>{errors.slug?.message}</span>
             <input
               className="bg-gray-200 text-gray-700 placeholder-gray-700 outline-none rounded p-2 w-full mt-2"
               type="text"
@@ -66,21 +90,31 @@ const PostForm = ({ post }: any) => {
               value={post?.cover}
               placeholder="Put your own cover link ex: http://example.com"
             />
-            <SelectInput />
+            <span>{errors.cover?.message}</span>
+            <div>
+              <SelectInput sectionSelected={sectionSelected} />
+              {}
+            </div>
+
+            <span>{errors.section?.message}</span>
+
             <TagsInput selectedTags={selectedTags} tagsP={[]} />
-            <Tiptab />
-            {/**
-             * <Controller
+
+            <span>{errors.tags?.message}</span>
+
+            <Controller
               name="description"
               control={control}
               defaultValue={post?.description}
               render={({ field }) => (
-                <SimpleMDE placeholder="Description" {...field} />
+                <SimpleMDE
+                  placeholder="Description"
+                  options={autofocusNoSpellcheckerOptions}
+                  {...field}
+                />
               )}
             />
-             * 
-             * 
-             */}
+            <span>{errors.description?.message}</span>
 
             <button
               className="flex items-center justify-between gap-3 bg-[#1f4d78] text-white rounded w-full h-[50px] px-4"

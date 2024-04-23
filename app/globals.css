@@ -43,3 +43,44 @@
     transform: rotate(360deg);
   }
 }
+body .w-md-editor-text-pre > code,
+body .w-md-editor-text-input {
+  font-size: 23px !important;
+  line-height: 24px !important;
+}
+
+body
+  > main
+  > div
+  > div
+  > form
+  > div.wmde-markdown-var.w-md-editor.w-md-editor-show-edit
+  > div.w-md-editor-content {
+  background-color: rgb(229 231 235 / 1);
+  color: rgb(55 65 81 / 1);
+}
+
+body
+  > main
+  > div
+  > div
+  > form
+  > div.wmde-markdown-var.w-md-editor.w-md-editor-show-edit
+  > div.w-md-editor-toolbar {
+  background-color: rgb(229 231 235 / 1);
+  color: rgb(55 65 81 / 1);
+}
+
+body
+  > main
+  > div
+  > div
+  > form
+  > div.wmde-markdown-var.w-md-editor.w-md-editor-show-edit
+  > div.w-md-editor-toolbar
+  > ul
+  > li
+  > button
+  > svg {
+  color: rgb(55 65 81 / 1);
+}
