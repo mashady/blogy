@@ -26,7 +26,7 @@
     "@types/React": "npm:@types/react@^18.2.79",
     "@uiw/react-md-editor": "^4.0.4",
     "axios": "^1.6.8",
-    "framer-motion": "^11.0.24",
+    "framer-motion": "^11.1.7",
     "next": "14.1.4",
     "prisma": "^5.12.1",
     "react": "^18",

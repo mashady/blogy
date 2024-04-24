@@ -84,3 +84,6 @@ body
   > svg {
   color: rgb(55 65 81 / 1);
 }
+.org {
+  transform-origin: 0%;
+}

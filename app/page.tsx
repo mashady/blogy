@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="">
-      <Link href="/post">post page</Link>
+      <Link href="/posts">post page</Link>
       <Link href="/new-post">new post page</Link>
     </main>
   );

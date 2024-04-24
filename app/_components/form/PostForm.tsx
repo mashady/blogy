@@ -29,10 +29,20 @@ const PostForm = ({ post }: any) => {
   const [error, setError] = useState("");
   const [isSubmitting, setSubmitting] = useState(false);
 
-  const onSubmit = handleSubmit((data, e) => {
-    e?.preventDefault();
-    console.log(data);
-    console.log("submitted");
+  const onSubmit = handleSubmit(async (data, e) => {
+    try {
+      setSubmitting(true);
+      if (post) await axios.patch("/api/posts" + post.id, data);
+      else await axios.post("/api/posts", data);
+      setSubmitting(false);
+
+      router.push("/");
+      router.refresh();
+    } catch (error) {
+      setSubmitting(false);
+      setError("An unexpected error occurred.");
+      console.log(error);
+    }
   });
 
   const selectedTags = (tags: any) => {
