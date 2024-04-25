@@ -7,7 +7,7 @@ import {
   PostTags,
   PostTitle,
   Scroll,
-} from "./[id]/index";
+} from "../[id]/index";
 const Post = () => {
   return (
     <div className="max-w-[1280px] mx-auto px-4">

@@ -1,7 +1,8 @@
-import { cache } from "react";
+import { cache, Suspense } from "react";
 
 import prisma from "@/prisma/client";
 import { notFound } from "next/navigation";
+import Loading from "./loading";
 
 interface Props {
   params: { id: string };
@@ -19,7 +20,9 @@ const PostDetailsPage = async ({ params }: Props) => {
 
   return (
     <div>
-      <h1>post id:{post.title}</h1>
+      <Suspense fallback={<Loading />}>
+        <h1>post id:{post.title}</h1>
+      </Suspense>
     </div>
   );
 };

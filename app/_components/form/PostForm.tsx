@@ -70,75 +70,73 @@ const PostForm = ({ post }: any) => {
   }, []);
   return (
     <>
-      <div className="max-w-[1280px] mx-auto px-4 mt-8">
-        <div className="max-w-xl">
-          <form
-            className="space-y-3 mb-6"
-            onSubmit={onSubmit}
-            onKeyDown={preventEnterKeySubmission}
+      <div className="max-w-xl">
+        <form
+          className="space-y-3 mb-6"
+          onSubmit={onSubmit}
+          onKeyDown={preventEnterKeySubmission}
+        >
+          <input
+            className="bg-gray-200 text-gray-700 placeholder-gray-700 outline-none rounded p-2 w-full mt-2"
+            type="text"
+            value={post?.title}
+            {...register("title")}
+            placeholder="Name your title"
+          />
+          <span>{errors.title?.message}</span>
+          <input
+            className="bg-gray-200 text-gray-700 placeholder-gray-700 outline-none rounded p-2 w-full mt-2"
+            type="text"
+            {...register("slug")}
+            value={post?.slug}
+            placeholder="Write your own link slug"
+          />
+          <span>{errors.slug?.message}</span>
+          <input
+            className="bg-gray-200 text-gray-700 placeholder-gray-700 outline-none rounded p-2 w-full mt-2"
+            type="text"
+            {...register("cover")}
+            value={post?.cover}
+            placeholder="Put your own cover link ex: http://example.com"
+          />
+          <span>{errors.cover?.message}</span>
+          <div>
+            <SelectInput sectionSelected={sectionSelected} />
+            {}
+          </div>
+
+          <span>{errors.section?.message}</span>
+
+          <TagsInput selectedTags={selectedTags} tagsP={[]} />
+
+          <span>{errors.tags?.message}</span>
+
+          <Controller
+            name="description"
+            control={control}
+            defaultValue={post?.description}
+            render={({ field }) => (
+              <SimpleMDE
+                placeholder="Description"
+                options={autofocusNoSpellcheckerOptions}
+                {...field}
+              />
+            )}
+          />
+          <span>{errors.description?.message}</span>
+
+          <button
+            className="flex items-center justify-between gap-3 bg-[#1f4d78] text-white rounded w-full h-[50px] px-4"
+            disabled={isSubmitting}
           >
-            <input
-              className="bg-gray-200 text-gray-700 placeholder-gray-700 outline-none rounded p-2 w-full mt-2"
-              type="text"
-              value={post?.title}
-              {...register("title")}
-              placeholder="Name your title"
-            />
-            <span>{errors.title?.message}</span>
-            <input
-              className="bg-gray-200 text-gray-700 placeholder-gray-700 outline-none rounded p-2 w-full mt-2"
-              type="text"
-              {...register("slug")}
-              value={post?.slug}
-              placeholder="Write your own link slug"
-            />
-            <span>{errors.slug?.message}</span>
-            <input
-              className="bg-gray-200 text-gray-700 placeholder-gray-700 outline-none rounded p-2 w-full mt-2"
-              type="text"
-              {...register("cover")}
-              value={post?.cover}
-              placeholder="Put your own cover link ex: http://example.com"
-            />
-            <span>{errors.cover?.message}</span>
-            <div>
-              <SelectInput sectionSelected={sectionSelected} />
-              {}
-            </div>
-
-            <span>{errors.section?.message}</span>
-
-            <TagsInput selectedTags={selectedTags} tagsP={[]} />
-
-            <span>{errors.tags?.message}</span>
-
-            <Controller
-              name="description"
-              control={control}
-              defaultValue={post?.description}
-              render={({ field }) => (
-                <SimpleMDE
-                  placeholder="Description"
-                  options={autofocusNoSpellcheckerOptions}
-                  {...field}
-                />
-              )}
-            />
-            <span>{errors.description?.message}</span>
-
-            <button
-              className="flex items-center justify-between gap-3 bg-[#1f4d78] text-white rounded w-full h-[50px] px-4"
-              disabled={isSubmitting}
-            >
-              {post ? "Update Post" : "Submit New Post"}{" "}
-              {isSubmitting && (
-                <div className="inline-flex">
-                  <span className="loader"></span>
-                </div>
-              )}
-            </button>
-          </form>
-        </div>
+            {post ? "Update Post" : "Submit New Post"}{" "}
+            {isSubmitting && (
+              <div className="inline-flex">
+                <span className="loader"></span>
+              </div>
+            )}
+          </button>
+        </form>
       </div>
     </>
   );

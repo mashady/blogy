@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Post {
-  id               Int      @id @default(autoincrement())
+  id               String   @id @default(uuid())
   title            String   @db.VarChar(255)
   slug             String   @db.VarChar(255)
   cover            String   @db.VarChar(255)
@@ -28,8 +28,10 @@ model Post {
 }
 
 model Tags {
-  id   Int    @id @default(autoincrement())
-  name String @db.VarChar(255)
+  id        String @id @default(uuid())
+  name      String
+  //article   Post   @relation(fields: [articleId], references: [id])
+  articleId String
 }
 
 model Account {

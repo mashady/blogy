@@ -8,8 +8,8 @@ export const postSchema = z.object({
     .url()
     .refine((s) => !s.includes(" "), "Enter a valid URL"),
   section: z.string().min(1, "section is required").max(255),
-  tags: z.string(),
-  // tags: z.string().array(),
+  //tags: z.string(),
+  tags: z.string().array(),
   description: z.string().min(1, "Description is required.").max(65535),
 });
 
