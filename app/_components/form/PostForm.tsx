@@ -77,7 +77,7 @@ const PostForm = ({ post }: any) => {
           onKeyDown={preventEnterKeySubmission}
         >
           <input
-            className="bg-gray-200 text-gray-700 placeholder-gray-700 outline-none rounded p-2 w-full mt-2"
+            className="bg-inherit text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white border-[#4242423b] dark:border-[#fff] border-[1px] outline-none rounded p-2 w-full mt-2"
             type="text"
             value={post?.title}
             {...register("title")}
@@ -85,7 +85,7 @@ const PostForm = ({ post }: any) => {
           />
           <span>{errors.title?.message}</span>
           <input
-            className="bg-gray-200 text-gray-700 placeholder-gray-700 outline-none rounded p-2 w-full mt-2"
+            className="bg-inherit text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white border-[#4242423b] dark:border-[#fff] border-[1px] outline-none rounded p-2 w-full mt-2"
             type="text"
             {...register("slug")}
             value={post?.slug}
@@ -93,7 +93,7 @@ const PostForm = ({ post }: any) => {
           />
           <span>{errors.slug?.message}</span>
           <input
-            className="bg-gray-200 text-gray-700 placeholder-gray-700 outline-none rounded p-2 w-full mt-2"
+            className="bg-inherit text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white border-[#4242423b] dark:border-[#fff] border-[1px] outline-none rounded p-2 w-full mt-2"
             type="text"
             {...register("cover")}
             value={post?.cover}

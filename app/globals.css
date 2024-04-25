@@ -87,3 +87,6 @@ body
 .org {
   transform-origin: 0%;
 }
+.CodeMirror {
+  background-color: inherit !important;
+}

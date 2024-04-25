@@ -16,12 +16,12 @@ const TagsInput = ({ tagsP, selectedTags }: any) => {
     }
   };
   return (
-    <div className="tags-input bg-gray-200 items-center w-full">
+    <div className="tags-input bg-inherit items-center w-full border-[#4242423b] dark:border-[#fff] border-[1px]">
       <input
         type="text"
         onKeyUp={(event) => (event.key === "Enter" ? addTags(event) : null)}
         placeholder="Press enter to add tags"
-        className="bg-gray-200 text-gray-700 placeholder-gray-700 outline-none rounded p-2 w-full "
+        className="bg-inherit text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white  outline-none rounded p-2 w-full"
       />
       <ul className="flex flex-wrap">
         {tags.map((tag: any, index: any) => (
