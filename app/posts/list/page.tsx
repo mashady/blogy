@@ -1,3 +1,4 @@
+import prisma from "@/prisma/client";
 import {
   FeaturePosts,
   PostComments,
@@ -8,7 +9,19 @@ import {
   PostTitle,
   Scroll,
 } from "../[id]/index";
-const Post = () => {
+const Post = async () => {
+  const tags = await prisma.tag.findMany();
+  const posts = await prisma.post.findMany({
+    where: {
+      tags: {
+        some: {
+          name: "king-abusamir",
+        },
+      },
+    },
+  });
+  console.log(tags);
+  console.log(posts);
   return (
     <div className="max-w-[1280px] mx-auto px-4">
       <Scroll />

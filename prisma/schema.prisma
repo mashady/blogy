@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Post {
-  id               String   @id @default(uuid())
+  id               Int   @id @default(autoincrement())
   title            String   @db.VarChar(255)
   slug             String   @db.VarChar(255)
   cover            String   @db.VarChar(255)
@@ -24,14 +24,13 @@ model Post {
   updatedAt        DateTime @updatedAt
   assignedToUserId String?  @db.VarChar(255)
   assignedToUser   User?    @relation(fields: [assignedToUserId], references: [id])
-  tags             String
+  tags             Tag[]
 }
 
-model Tags {
-  id        String @id @default(uuid())
-  name      String
-  //article   Post   @relation(fields: [articleId], references: [id])
-  articleId String
+model Tag {
+  id   Int @id @default(autoincrement())
+  name String 
+  posts Post[]
 }
 
 model Account {
