@@ -8,36 +8,27 @@ import {
   PostTags,
   PostTitle,
   Scroll,
-} from "../[id]/index";
-const Post = async () => {
-  const tags = await prisma.tag.findMany();
+} from "../[slug]/index";
+import { notFound } from "next/navigation";
+const Post = async ({ searchParams }: any) => {
   const posts = await prisma.post.findMany({
     where: {
       tags: {
         some: {
-          name: "king-abusamir",
+          name: searchParams.tag,
         },
+      },
+      section: {
+        contains: searchParams.section,
       },
     },
   });
-  console.log(tags);
+  if (posts.length === 0) notFound();
   console.log(posts);
   return (
+    /** create the list issues */
     <div className="max-w-[1280px] mx-auto px-4">
-      <Scroll />
-      <PostTags />
-      <PostTitle />
-      <div className="grid grid-cols-1 lg:grid-cols-3">
-        <div className="col-span-2">
-          <PostDetails />
-          <PostImage />
-          <PostSubject />
-          <PostComments />
-        </div>
-        <div>
-          <FeaturePosts />
-        </div>
-      </div>
+      <h1>list page</h1>
     </div>
   );
 };

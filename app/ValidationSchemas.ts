@@ -1,5 +1,9 @@
 import { z } from "zod";
 
+const tagSchema = z.object({
+  name: z.string(),
+});
+
 export const postSchema = z.object({
   title: z.string().min(1, "title is required").max(255),
   slug: z.string().refine((s) => !s.includes(" "), "No Spaces!"),
@@ -9,7 +13,7 @@ export const postSchema = z.object({
     .refine((s) => !s.includes(" "), "Enter a valid URL"),
   section: z.string().min(1, "section is required").max(255),
   //tags: z.string(),
-  tags: z.string().array(),
+  tags: z.array(tagSchema),
   description: z.string().min(1, "Description is required.").max(65535),
 });
 

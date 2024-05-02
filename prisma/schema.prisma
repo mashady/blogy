@@ -16,7 +16,7 @@ datasource db {
 model Post {
   id               Int   @id @default(autoincrement())
   title            String   @db.VarChar(255)
-  slug             String   @db.VarChar(255)
+  slug             String   @db.VarChar(255) @unique
   cover            String   @db.VarChar(255)
   description      String   @db.Text
   section          String   @db.Text
