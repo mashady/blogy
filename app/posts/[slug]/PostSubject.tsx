@@ -1,9 +1,17 @@
-import React from "react";
+import Link from "next/link";
+import { FaPlus } from "react-icons/fa";
+interface PostSubjectProps {
+  readMore?: boolean;
+}
 
-const PostSubject = () => {
+const PostSubject = ({ readMore }: PostSubjectProps) => {
   return (
     <div className="mb-6">
-      <article className="prose lg:prose-xl text-[18px]">
+      <article
+        className={`prose lg:prose-xl text-[18px] ${
+          readMore && "line-clamp-5"
+        }`}
+      >
         Siri launched with the iPhone 4S in October 2011, replacing Voice
         Control with a more capable virtual assistant. A dozen years later, Siri
         has evolved into the primary way we interact with our Apple products.
@@ -27,6 +35,19 @@ const PostSubject = () => {
         subscription? Will I actually use Siri on my Mac? My hopes are so, so
         high. My expectations are conservative and measured.
       </article>
+      {readMore && (
+        <div className=" flex justify-center items-center">
+          <Link
+            href="/"
+            className="flex flex-col justify-center items-center my-4"
+          >
+            <FaPlus className="text-2xl cursor-pointer mb-2" />
+            <strong className="uppercase cursor-pointer hover:underline text-[0.9rem]">
+              read more
+            </strong>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

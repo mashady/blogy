@@ -12,7 +12,7 @@ import HeroPost from "./HeroPost";
 
 const HomeHeader = () => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 pb-10">
+    <div className="grid grid-cols-1 lg:grid-cols-3">
       <HeroPost />
       <FeaturePost />
     </div>

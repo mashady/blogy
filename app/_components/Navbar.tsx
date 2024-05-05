@@ -1,6 +1,10 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import SectionsBar from "./SectionsBar";
+import { IoMoon, IoSunny } from "react-icons/io5";
+import DarkMode from "./DarkMode";
 
 const Navbar = () => {
   return (
@@ -10,7 +14,9 @@ const Navbar = () => {
           <div className="font-semibold text-xl text-main dark:text-white">
             <Link href="/">blogy</Link>
           </div>
-          <div className="text-[14px] md:text-[16px] font-semibold">
+          <div className="text-[14px] md:text-[16px] font-semibold flex">
+            <DarkMode />
+
             <button>
               <Link href="/sign-in">Sign In</Link>
             </button>

@@ -13,6 +13,7 @@ import {
   PostTitle,
   Scroll,
 } from "../[slug]/index";
+import FeaturePost from "@/app/_components/FeaturePost";
 interface Props {
   params: { slug: string };
 }
@@ -42,7 +43,7 @@ const PostDetailsPage = async ({ params }: Props) => {
           <PostComments />
         </div>
         <div>
-          <FeaturePosts />
+          <FeaturePost />
         </div>
       </div>
     </div>

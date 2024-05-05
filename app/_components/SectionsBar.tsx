@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React from "react";
-import DarkModeToggler from "./dark mode/DarkModeToggler";
 
 const SECTION_LINKS: any = [
   {
@@ -55,8 +54,6 @@ const SectionsBar = () => {
                 </div>
               ))}
             </div>
-
-            <DarkModeToggler />
           </div>
         </div>
       </div>
