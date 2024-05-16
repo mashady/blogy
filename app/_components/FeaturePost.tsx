@@ -31,7 +31,7 @@ const fakePosts = [
 const FeaturePost = () => {
   return (
     <div>
-      <h1 className="text-4xl font-bold mt-4 capitalize">features</h1>
+      <h1 className="text-4xl font-bold mt-[3rem] capitalize">features</h1>
       {fakePosts.map((post, i) => {
         return (
           <div key={i} className={i === 1 ? "border-y-[1px]" : ""}>
