@@ -17,9 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="">
-        <main className="text-[#0e0e0e] bg-[#fff] dark:bg-[#0e0e0e] dark:text-white">
+        <main className="text-[#0e0e0e] bg-[#fff] dark:bg-[#0e0e0e] dark:text-white ">
           <Navbar />
-          <main>{children}</main>
+          <main className="min-h-[calc(100vh-14rem-2px)]">{children}</main>
           <Footer />
         </main>
       </body>
