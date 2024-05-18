@@ -2,7 +2,10 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { FiAlertCircle } from "react-icons/fi";
 import { useState } from "react";
-
+/***
+ * this modal will be modified soon ..
+ * 
+ */
 const ExampleWrapper = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
