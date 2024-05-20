@@ -18,10 +18,10 @@ const Navbar = () => {
             <DarkMode />
 
             <button>
-              <Link href="/sign-in">Sign In</Link>
+              <Link href="/login">Sign In</Link>
             </button>
             <button className="bg-sec text-white w-[100px] h-[40px] ml-4 rounded-lg ">
-              <Link href="/sign-up">Sign Up</Link>
+              <Link href="/register">Sign Up</Link>
             </button>
           </div>
         </nav>

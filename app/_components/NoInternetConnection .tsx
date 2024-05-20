@@ -1,30 +1,32 @@
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const useNetworkStatus = () => {
-  const [isOnline, setOnline] = useState<boolean>(true);
-
-  const updateNetworkStatus = () => {
-    setOnline(navigator.onLine);
-  };
-
-  //   sometimes, the load event does not trigger on some browsers, that is why manually calling updateNetworkStatus on initial mount
+const ConnectionStatus = () => {
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+  console.log(navigator);
   useEffect(() => {
-    updateNetworkStatus();
-  }, []);
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
 
-  useEffect(() => {
-    window.addEventListener("load", updateNetworkStatus);
-    window.addEventListener("online", updateNetworkStatus);
-    window.addEventListener("offline", updateNetworkStatus);
+    // Add event listeners when the component mounts
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
 
+    // Cleanup listeners when the component unmounts
     return () => {
-      window.removeEventListener("load", updateNetworkStatus);
-      window.removeEventListener("online", updateNetworkStatus);
-      window.removeEventListener("offline", updateNetworkStatus);
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
     };
-  }, [navigator.onLine]);
-
-  return { isOnline };
+  }, []); // Empty dependency array ensures the effect runs only once
+  console.log(navigator.onLine);
+  return (
+    <div>
+      {isOnline ? (
+        <p>Internet connection is stable.</p>
+      ) : (
+        <p>Internet connection lost.</p>
+      )}
+    </div>
+  );
 };
 
-export default useNetworkStatus;
+export default ConnectionStatus;
