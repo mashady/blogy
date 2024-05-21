@@ -14,6 +14,7 @@ import {
   Scroll,
 } from "../[slug]/index";
 import FeaturePost from "@/app/_components/FeaturePost";
+import MaxWidthWrapper from "@/app/_components/MaxWidthWrapper";
 interface Props {
   params: { slug: string };
 }
@@ -31,7 +32,7 @@ const PostDetailsPage = async ({ params }: Props) => {
   const post = await fetchPosts(params.slug);
   if (!post) notFound();
   return (
-    <div className="max-w-[1280px] mx-auto px-4">
+    <MaxWidthWrapper>
       <Scroll />
       <PostTags />
       <PostTitle />
@@ -46,7 +47,7 @@ const PostDetailsPage = async ({ params }: Props) => {
           <FeaturePost />
         </div>
       </div>
-    </div>
+    </MaxWidthWrapper>
   );
 };
 

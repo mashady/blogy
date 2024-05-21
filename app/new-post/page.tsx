@@ -1,11 +1,12 @@
 import React from "react";
 import PostForm from "../_components/form/PostForm";
 import Loading from "./loading";
+import MaxWidthWrapper from "../_components/MaxWidthWrapper";
 const page = () => {
   return (
-    <div className="max-w-[1280px] mx-auto px-4 mt-8">
+    <MaxWidthWrapper className="mt-8">
       <PostForm />
-    </div>
+    </MaxWidthWrapper>
   );
 };
 
