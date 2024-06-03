@@ -9,6 +9,8 @@ import SuccessMessage from "./SuccessMessage";
 import { z } from "zod";
 import { useSearchParams } from "next/navigation";
 import { LoginSchema } from "@/scemas";
+import { login } from "@/actions/login";
+import { useRouter } from "next/navigation";
 type LoginFormData = z.infer<typeof LoginSchema>;
 
 let loginPagePoster =
@@ -19,6 +21,7 @@ const LoginForm = () => {
   const [success, setSuccess] = useState("");
   const [isPending, startTransition] = useTransition();
   const [showTwoFactor, setShowTwoFactor] = useState(false);
+  const router = useRouter();
 
   // url error
   const searchParams = useSearchParams();
@@ -34,6 +37,7 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<LoginFormData>({
     resolver: zodResolver(LoginSchema),
@@ -42,6 +46,28 @@ const LoginForm = () => {
   // create the submit method
   const handleFormSubmit: SubmitHandler<LoginFormData> = async (values) => {
     console.log(values);
+    setError("");
+    setSuccess("");
+    // todo: back to test this steps soon
+    let drct = "/register";
+    startTransition(() => {
+      login(values, drct)
+        .then((data) => {
+          if (data?.error) {
+            // form.reset();
+            setError(data.error);
+          }
+          if (data?.success) {
+            reset();
+            setSuccess(data.success);
+            router.push("/dashboard");
+          }
+          if (data?.twoFactor) {
+            setShowTwoFactor(true);
+          }
+        })
+        .catch((err) => setError(err.message));
+    });
   };
 
   return (

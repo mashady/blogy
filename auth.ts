@@ -5,11 +5,13 @@ import prisma from "@/prisma/client";
 import { getUserById } from "./data/user";
 import { getTwoFactorConfirmationById } from "./data/twoFactorConfirmation";
 import { getAccountByUserId } from "./data/account";
+import { isRedirectError } from "next/dist/client/components/redirect";
 /***
 
 ### back to this file soon 
 
 */
+
 export const {
   handlers: { GET, POST },
   auth,
@@ -18,8 +20,8 @@ export const {
   update,
 } = NextAuth({
   pages: {
-    signIn: "/auth/login",
-    error: "/auth/error",
+    signIn: "/login",
+    error: "/error",
   },
   events: {
     async linkAccount({ user }) {

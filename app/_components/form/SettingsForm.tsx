@@ -1,0 +1,80 @@
+import React from "react";
+
+const SettingsForm = () => {
+  return (
+    <div>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+      <h1>cccc</h1>
+    </div>
+  );
+};
+
+export default SettingsForm;
