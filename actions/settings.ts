@@ -65,7 +65,9 @@ export const settings = async (values: any) => {
   });
 
   // SERVER UPDATE
-  update({
+  /**
+  
+   update({
     user: {
       name: updatedUser.name,
       email: updatedUser.email,
@@ -73,6 +75,8 @@ export const settings = async (values: any) => {
       isTwoFactorEnabled: updatedUser.isTwoFactorEnabled,
     },
   });
+  
+  */
 
   return { success: "Settings updated!" };
 };

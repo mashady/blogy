@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import NextAuth, { DefaultSession } from "next-auth";
 import SettingsPageTitle from "@/app/_components/SettingsPageTitle";
 import { settings } from "@/actions/settings";
 import { useSession } from "next-auth/react";
@@ -15,10 +15,27 @@ import SuccessMessage from "./SuccessMessage";
 import ChooseRole from "./ChooseRole";
 import TwoFactor from "../Switch";
 
+export enum UserRole {
+  ADMIN = "ADMIN",
+  USER = "USER",
+}
+declare module "next-auth" {
+  /**
+   * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
+   */
+  interface Session {
+    user: {
+      role: UserRole | undefined | null;
+      isTwoFactorEnabled: boolean | undefined;
+      isOAuth: boolean;
+    } & DefaultSession["user"];
+  }
+}
+
 type SettingsProfileFormData = z.infer<typeof SettingsSchema>;
 
 const SettingsProfileForm = () => {
-  const { data: session } = useSession();
+  const session = useSession();
   const { update } = useSession();
   const router = useRouter();
   const [error, setError] = useState("");
@@ -33,6 +50,14 @@ const SettingsProfileForm = () => {
     formState: { errors },
   } = useForm<SettingsProfileFormData>({
     resolver: zodResolver(SettingsSchema),
+    defaultValues: {
+      name: (session.data?.user?.name as string) || undefined,
+      email: (session.data?.user?.email as string) || undefined,
+      password: undefined,
+      newPassword: undefined,
+      role: session.data?.user?.role || undefined,
+      isTwoFactorEnabled: session.data?.user?.isTwoFactorEnabled || false,
+    },
   });
   const handleSelectRole = (value: any) => {
     setValue("role", value, { shouldValidate: true });
@@ -60,14 +85,17 @@ const SettingsProfileForm = () => {
               reset();
             }
           })
-          .catch(() => setError("Something went wrong"));
+          .catch(() => setError("error "));
       });
     } catch (e) {
       console.error("Validation error:", e);
       setError("Validation error: ");
     }
   };
-
+  /*console.log(
+    "Two factor value in session:",
+    session.data?.user?.isTwoFactorEnabled
+  );*/
   return (
     <div className="min-h-[100vh] pt-4 pl-4">
       <SettingsPageTitle pageName="profile" />
@@ -79,6 +107,7 @@ const SettingsProfileForm = () => {
         <h2 className="text-xl capitalize mt-4">Basics info</h2>
         <span className="text-[0.95rem]">Tell us about your basics info</span>
       </div>
+      {JSON.stringify(session.data?.user)}
       <LogoutButton />
       <form className="mt-4" onSubmit={handleSubmit(handleFormSubmit)}>
         <div className="flex flex-col mb-2">
@@ -86,6 +115,7 @@ const SettingsProfileForm = () => {
           <input
             type="text"
             placeholder="enter your username"
+            defaultValue={session.data?.user?.name || undefined}
             className={`bg-inherit ${
               errors.name
                 ? "border-[#dc3545] dark:border-[#dc3545] "
@@ -104,6 +134,7 @@ const SettingsProfileForm = () => {
               <input
                 type="email"
                 placeholder="enter your email address"
+                defaultValue={session.data?.user?.email || undefined}
                 className={`bg-inherit ${
                   errors.email
                     ? "border-[#dc3545] dark:border-[#dc3545] "
@@ -121,7 +152,7 @@ const SettingsProfileForm = () => {
           <label className="text-lg text-left">Password</label>
           <input
             type="password"
-            placeholder="enter your password"
+            placeholder="***************"
             className={`bg-inherit ${
               errors.password
                 ? "border-[#dc3545] dark:border-[#dc3545] "
@@ -137,7 +168,7 @@ const SettingsProfileForm = () => {
           <label className="text-lg text-left">New Password</label>
           <input
             type="password"
-            placeholder="enter your new password"
+            placeholder="***************"
             className={`bg-inherit ${
               errors.newPassword
                 ? "border-[#dc3545] dark:border-[#dc3545] "
@@ -152,14 +183,20 @@ const SettingsProfileForm = () => {
         {/** role */}
         <div className="flex flex-col mb-2">
           <label className="text-lg text-left">Role</label>
-          <ChooseRole handleSelectRole={handleSelectRole} />
+          <ChooseRole
+            handleSelectRole={handleSelectRole}
+            defaultValue={session.data?.user?.role}
+          />
           {errors.role && (
             <ErrorMessage message={errors.role.message as string} />
           )}
         </div>
         {/** two factor */}
         <div>
-          <TwoFactor handleSelectTwoFactor={handleSelectTwoFactor} />
+          <TwoFactor
+            handleSelectTwoFactor={handleSelectTwoFactor}
+            defaultValue={session.data?.user?.isTwoFactorEnabled || false}
+          />
           {errors.isTwoFactorEnabled && (
             <ErrorMessage
               message={errors.isTwoFactorEnabled.message as string}
