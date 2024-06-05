@@ -49,9 +49,9 @@ const LoginForm = () => {
     setError("");
     setSuccess("");
     // todo: back to test this steps soon
-    let drct = "/register";
+    let direct = "/register";
     startTransition(() => {
-      login(values, drct)
+      login(values, direct)
         .then((data) => {
           if (data?.error) {
             // form.reset();
@@ -60,7 +60,7 @@ const LoginForm = () => {
           if (data?.success) {
             reset();
             setSuccess(data.success);
-            router.push("/dashboard");
+            router.push("/settings/profile");
           }
           if (data?.twoFactor) {
             setShowTwoFactor(true);
@@ -120,6 +120,25 @@ const LoginForm = () => {
                 <Link href="/forget-password">Forget password</Link>
               </span>
             </div>
+            {/** two factor auth */}
+            {showTwoFactor && (
+              <div className="flex flex-col mb-4">
+                <label className="text-lg">Code</label>
+                <input
+                  type="text"
+                  placeholder="enter your code"
+                  className={`bg-inherit ] ${
+                    errors.password
+                      ? "border-[#dc3545] dark:border-[#dc3545]"
+                      : "border-[#4242423b] focus:border-[#1f4d78"
+                  } text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white  dark:border-[#fff] border-[1px] outline-none rounded p-2 w-full mt-2`}
+                  {...register("code")}
+                />
+                {errors.code && (
+                  <ErrorMessage message={errors.code?.message as string} />
+                )}
+              </div>
+            )}
             {/** server side error */}
             {error && <ErrorMessage message={error || urlError} />}{" "}
             {success && <SuccessMessage message={success} />}{" "}

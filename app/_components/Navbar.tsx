@@ -6,6 +6,7 @@ import SectionsBar from "./SectionsBar";
 import { IoMoon, IoSunny } from "react-icons/io5";
 import DarkMode from "./DarkMode";
 import { usePathname } from "next/navigation";
+import LogoutButton from "./LogoutButton";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -22,6 +23,8 @@ const Navbar = () => {
               </div>
               <div className="text-[14px] md:text-[16px] font-semibold flex">
                 <DarkMode />
+
+                <LogoutButton />
 
                 <button>
                   <Link href="/login">Sign In</Link>

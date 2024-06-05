@@ -16,7 +16,9 @@ export default function SettingsLayout({
     <main className="text-[#0e0e0e] bg-[#fff] dark:bg-[#0e0e0e] dark:text-white ">
       <div className="flex gap-5">
         <SettingsNav />
-        <main className="min-h-[calc(100vh-14rem-2px)]">{children}</main>
+        <main className="min-h-[calc(100vh-14rem-2px)] w-[80%]">
+          {children}
+        </main>
       </div>
     </main>
   );

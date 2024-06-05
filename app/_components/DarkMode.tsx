@@ -5,15 +5,15 @@ const DarkMode = () => {
   const [dark, setDark] = React.useState(false);
   // todo create the checker method
   let lalal = localStorage.getItem("dark");
-  console.log(lalal);
+  // console.log(lalal);
   useEffect(() => {
     if (lalal === "darkMode") {
       setDark(true);
-      console.log("lalal dark mode");
+      //console.log("lalal dark mode");
       document.body.classList.add("dark");
     } else {
       setDark(false);
-      console.log("lalal light mode");
+      //console.log("lalal light mode");
     }
   }, []);
 
