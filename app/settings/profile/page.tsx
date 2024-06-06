@@ -1,11 +1,11 @@
-"use client";
-
 import SettingsProfileForm from "@/app/_components/form/SettingsProfileForm";
+import { currentUser } from "@/lib/auth";
 
-const page = () => {
+const page = async () => {
+  const user = await currentUser();
   return (
     <>
-      <SettingsProfileForm />
+      <SettingsProfileForm user={user} />
     </>
   );
 };

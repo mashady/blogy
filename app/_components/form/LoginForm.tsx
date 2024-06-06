@@ -88,11 +88,11 @@ const LoginForm = () => {
               <input
                 type="text"
                 placeholder="enter your email address"
-                className={`bg-inherit ] ${
+                className={`bg-inherit ${
                   errors.email
-                    ? "border-[#dc3545] dark:border-[#dc3545]"
-                    : "border-[#4242423b] focus:border-[#1f4d78"
-                } text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white  dark:border-[#fff] border-[1px] outline-none rounded p-2 w-full mt-2`}
+                    ? "border-[#dc3545] dark:border-[#dc3545] "
+                    : "border-[#4242423b] focus:border-[#1f4d78] dark:focus:border-[#1f4d78] dark:border-[#fff] "
+                } text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white border-[1px] outline-none rounded p-2 w-full mt-2`}
                 {...register("email")}
               />
               {errors.email && (
@@ -104,11 +104,11 @@ const LoginForm = () => {
               <input
                 type="password"
                 placeholder="enter your password"
-                className={`bg-inherit ] ${
+                className={`bg-inherit ${
                   errors.password
-                    ? "border-[#dc3545] dark:border-[#dc3545]"
-                    : "border-[#4242423b] focus:border-[#1f4d78"
-                } text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white  dark:border-[#fff] border-[1px] outline-none rounded p-2 w-full mt-2`}
+                    ? "border-[#dc3545] dark:border-[#dc3545] "
+                    : "border-[#4242423b] focus:border-[#1f4d78] dark:focus:border-[#1f4d78] dark:border-[#fff] "
+                } text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white border-[1px] outline-none rounded p-2 w-full mt-2`}
                 {...register("password")}
               />
               {errors.password && (
@@ -127,11 +127,11 @@ const LoginForm = () => {
                 <input
                   type="text"
                   placeholder="enter your code"
-                  className={`bg-inherit ] ${
-                    errors.password
-                      ? "border-[#dc3545] dark:border-[#dc3545]"
-                      : "border-[#4242423b] focus:border-[#1f4d78"
-                  } text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white  dark:border-[#fff] border-[1px] outline-none rounded p-2 w-full mt-2`}
+                  className={`bg-inherit ${
+                    errors.code
+                      ? "border-[#dc3545] dark:border-[#dc3545] "
+                      : "border-[#4242423b] focus:border-[#1f4d78] dark:focus:border-[#1f4d78] dark:border-[#fff] "
+                  } text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white border-[1px] outline-none rounded p-2 w-full mt-2`}
                   {...register("code")}
                 />
                 {errors.code && (

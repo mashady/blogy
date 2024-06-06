@@ -36,6 +36,7 @@ export const login = async (values: any, callbackUrl: any) => {
     return { success: "Confirmation email sent!" };
   }
 
+  // two factor authentication
   if (existingUser.isTwoFactorEnabled && existingUser.email) {
     if (code) {
       const twoFactorToken = await getTwoFactorTokenByEmail(existingUser.email);

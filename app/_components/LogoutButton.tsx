@@ -9,7 +9,7 @@ const LogoutButton = () => {
 
   return (
     <span onClick={onClick} className="cursor-pointer">
-      logout
+      Log Out
     </span>
   );
 };

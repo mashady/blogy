@@ -11,9 +11,25 @@ import { SettingsSchema } from "@/scemas";
 import { z } from "zod";
 import ErrorMessage from "./ErrorMessage";
 import LogoutButton from "../LogoutButton";
-import SuccessMessage from "./SuccessMessage";
-import ChooseRole from "./ChooseRole";
-import TwoFactor from "../Switch";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export enum UserRole {
   ADMIN = "ADMIN",
@@ -34,7 +50,7 @@ declare module "next-auth" {
 
 type SettingsProfileFormData = z.infer<typeof SettingsSchema>;
 
-const SettingsProfileForm = () => {
+const SettingsProfileForm = ({ user }: any) => {
   const session = useSession();
   const { update } = useSession();
   const router = useRouter();
@@ -42,28 +58,22 @@ const SettingsProfileForm = () => {
   const [success, setSuccess] = useState("");
   const [isPending, startTransition] = useTransition();
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    setValue,
-    formState: { errors },
-  } = useForm<SettingsProfileFormData>({
+  const form = useForm({
     resolver: zodResolver(SettingsSchema),
     defaultValues: {
-      name: (session.data?.user?.name as string) || undefined,
-      email: (session.data?.user?.email as string) || undefined,
+      name: user?.name || undefined,
+      email: user?.email || undefined,
       password: undefined,
       newPassword: undefined,
-      role: session.data?.user?.role || undefined,
-      isTwoFactorEnabled: session.data?.user?.isTwoFactorEnabled || false,
+      role: user?.role || undefined,
+      isTwoFactorEnabled: user?.isTwoFactorEnabled || undefined,
     },
   });
   const handleSelectRole = (value: any) => {
-    setValue("role", value, { shouldValidate: true });
+    form.setValue("role", value, { shouldValidate: true });
   };
   const handleSelectTwoFactor = (value: any) => {
-    setValue("isTwoFactorEnabled", value, { shouldValidate: true });
+    form.setValue("isTwoFactorEnabled", value, { shouldValidate: true });
   };
   const handleFormSubmit = async (values: SettingsProfileFormData) => {
     try {
@@ -82,7 +92,7 @@ const SettingsProfileForm = () => {
               console.log("success:", data.success);
               update();
               router.refresh();
-              reset();
+              form.reset();
             }
           })
           .catch(() => setError("error "));
@@ -103,13 +113,180 @@ const SettingsProfileForm = () => {
         <h1 className="text-2xl capitalize">profile</h1>
         <span className="text-[0.95rem]">Manage your profile settings</span>
       </div>
-      <div>
+      <div className="mb-4">
         <h2 className="text-xl capitalize mt-4">Basics info</h2>
         <span className="text-[0.95rem]">Tell us about your basics info</span>
       </div>
-      {JSON.stringify(session.data?.user)}
-      <LogoutButton />
-      <form className="mt-4" onSubmit={handleSubmit(handleFormSubmit)}>
+
+      <Form {...form}>
+        <form
+          className="w-[300px] space-y-4 pb-4"
+          onSubmit={form.handleSubmit(handleFormSubmit)}
+        >
+          <FormField
+            name="name"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Your beauty name :)"
+                      disabled={isPending}
+                      className={`bg-inherit ] ${
+                        form.formState.errors.name
+                          ? "border-[#dc3545] dark:border-[#dc3545]"
+                          : "border-[#4242423b] focus:border-[#1f4d78] dark:focus:border-[#1f4d78] dark:border-[#fff] "
+                      }  `}
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              );
+            }}
+          />
+          {session.data?.user?.isOAuth === false && (
+            <FormField
+              name="email"
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Your beauty email :)"
+                        disabled={isPending}
+                        type="email"
+                        className={`bg-inherit ] ${
+                          form.formState.errors.email
+                            ? "border-[#dc3545] dark:border-[#dc3545]"
+                            : "border-[#4242423b] focus:border-[#1f4d78] dark:focus:border-[#1f4d78] dark:border-[#fff] "
+                        } `}
+                        {...field}
+                      />
+                    </FormControl>
+                  </FormItem>
+                );
+              }}
+            />
+          )}
+          <FormField
+            name="password"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="**********"
+                      disabled={isPending}
+                      type="password"
+                      className={`bg-inherit ] ${
+                        form.formState.errors.password
+                          ? "border-[#dc3545] dark:border-[#dc3545]"
+                          : "border-[#4242423b] focus:border-[#1f4d78] dark:focus:border-[#1f4d78] dark:border-[#fff] "
+                      } `}
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              );
+            }}
+          />
+
+          <FormField
+            name="newPassword"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormLabel>New Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="**********"
+                      disabled={isPending}
+                      className={`bg-inherit ] ${
+                        form.formState.errors.newPassword
+                          ? "border-[#dc3545] dark:border-[#dc3545]"
+                          : "border-[#4242423b] focus:border-[#1f4d78] dark:focus:border-[#1f4d78] dark:border-[#fff] "
+                      } `}
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              );
+            }}
+          />
+
+          <FormField
+            name="role"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormLabel>Role</FormLabel>
+
+                  <Select
+                    disabled={isPending}
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="bg-sec outline-0">
+                        <SelectValue placeholder="Select a role" />
+                      </SelectTrigger>
+                    </FormControl>
+
+                    <SelectContent className="bg-sec">
+                      <SelectItem value="ADMIN">Admin</SelectItem>
+                      <SelectItem value="USER">User</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
+          />
+          <FormField
+            name="isTwoFactorEnabled"
+            render={({ field }) => {
+              return (
+                <FormItem className="flex flex-row items-center justify-between rounded-lg border border-white p-3 shadow-sm">
+                  <div className="space-y-0.5 ">
+                    <FormLabel>Two Factor Authentication</FormLabel>
+                    <FormDescription>
+                      Enable two factor authentication for your account.
+                    </FormDescription>
+                  </div>
+                  <FormControl>
+                    <Switch
+                      disabled={isPending}
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    ></Switch>
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
+          />
+          <Button
+            disabled={isPending}
+            type="submit"
+            className="bg-sec text-white"
+          >
+            Save
+          </Button>
+        </form>
+      </Form>
+    </div>
+  );
+};
+
+export default SettingsProfileForm;
+/***
+ * 
+ * 
+ * <form className="mt-4" onSubmit={handleSubmit(handleFormSubmit)}>
         <div className="flex flex-col mb-2">
           <label className="text-lg text-left">Name</label>
           <input
@@ -180,7 +357,6 @@ const SettingsProfileForm = () => {
             <ErrorMessage message={errors.newPassword.message as string} />
           )}
         </div>
-        {/** role */}
         <div className="flex flex-col mb-2">
           <label className="text-lg text-left">Role</label>
           <ChooseRole
@@ -191,7 +367,6 @@ const SettingsProfileForm = () => {
             <ErrorMessage message={errors.role.message as string} />
           )}
         </div>
-        {/** two factor */}
         <div>
           <TwoFactor
             handleSelectTwoFactor={handleSelectTwoFactor}
@@ -212,8 +387,12 @@ const SettingsProfileForm = () => {
           Save
         </button>
       </form>
-    </div>
-  );
-};
-
-export default SettingsProfileForm;
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
