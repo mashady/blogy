@@ -69,7 +69,7 @@ export const login = async (values: any, callbackUrl: any) => {
     const user = await signIn("credentials", {
       email,
       password,
-      redirect: false, // Set redirect to false for proper handling within this function
+      redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT, // Set redirect to false for proper handling within this function
     });
 
     console.log("USER LOGIN", user);

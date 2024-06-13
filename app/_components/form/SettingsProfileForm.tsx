@@ -53,6 +53,7 @@ type SettingsProfileFormData = z.infer<typeof SettingsSchema>;
 const SettingsProfileForm = ({ user }: any) => {
   const session = useSession();
   const { update } = useSession();
+
   const router = useRouter();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -70,9 +71,11 @@ const SettingsProfileForm = ({ user }: any) => {
     },
   });
   const handleSelectRole = (value: any) => {
+    // this part will ber removed
     form.setValue("role", value, { shouldValidate: true });
   };
   const handleSelectTwoFactor = (value: any) => {
+    // this part will be removed
     form.setValue("isTwoFactorEnabled", value, { shouldValidate: true });
   };
   const handleFormSubmit = async (values: SettingsProfileFormData) => {
@@ -89,10 +92,11 @@ const SettingsProfileForm = ({ user }: any) => {
               console.log("error:", data.error);
             } else if (data.success) {
               setSuccess(data.success);
+              if (session) router.refresh();
               console.log("success:", data.success);
               update();
-              router.refresh();
-              form.reset();
+              //router.refresh();
+              //form.reset();
             }
           })
           .catch(() => setError("error "));
@@ -117,7 +121,7 @@ const SettingsProfileForm = ({ user }: any) => {
         <h2 className="text-xl capitalize mt-4">Basics info</h2>
         <span className="text-[0.95rem]">Tell us about your basics info</span>
       </div>
-
+      {JSON.stringify(session.data?.user)}
       <Form {...form}>
         <form
           className="w-[300px] space-y-4 pb-4"

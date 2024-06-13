@@ -11,6 +11,8 @@ import { useSearchParams } from "next/navigation";
 import { LoginSchema } from "@/scemas";
 import { login } from "@/actions/login";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import useRefreshSession from "../hooks/useRefreshSession";
 type LoginFormData = z.infer<typeof LoginSchema>;
 
 let loginPagePoster =
@@ -22,7 +24,8 @@ const LoginForm = () => {
   const [isPending, startTransition] = useTransition();
   const [showTwoFactor, setShowTwoFactor] = useState(false);
   const router = useRouter();
-
+  const { update } = useSession();
+  const { refreshSession } = useRefreshSession();
   // url error
   const searchParams = useSearchParams();
   const urlError =
@@ -51,22 +54,28 @@ const LoginForm = () => {
     // todo: back to test this steps soon
     let direct = "/register";
     startTransition(() => {
-      login(values, direct)
+      login(values, callbackUrl)
         .then((data) => {
           if (data?.error) {
             // form.reset();
             setError(data.error);
           }
           if (data?.success) {
-            reset();
+            //router.refresh();
+            // for now we will create a full reload after login to update the session
+            //location.href = "/settings/profile";
+
             setSuccess(data.success);
-            router.push("/settings/profile");
+            // refreshSession();
           }
           if (data?.twoFactor) {
             setShowTwoFactor(true);
           }
         })
-        .catch((err) => setError(err.message));
+        .catch((err) => setError(err.message))
+        .finally(() => {
+          update();
+        });
     });
   };
 

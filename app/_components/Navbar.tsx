@@ -5,17 +5,24 @@ import SectionsBar from "./SectionsBar";
 import DarkMode from "./DarkMode";
 import { usePathname } from "next/navigation";
 import LogoutButton from "./LogoutButton";
-import { useCurrentUser } from "./hooks/useCurrentUser";
 import { useState, useEffect } from "react";
 import { UserButton } from "./UserButton";
+import { useSession } from "next-auth/react";
+import { useCurrentUser } from "./hooks/useCurrentUser";
 
-const Navbar = () => {
-  const pathname = usePathname();
-  if (pathname === "/settings") console.log("settings page");
+const Navbar = ({ xuser }: any) => {
   const user = useCurrentUser();
-  const [currentUser, setCurrentUser] = useState<any>("");
+
+  const { data: session, status } = useSession();
+  const pathname = usePathname();
+  const [currentUser, setCurrentUser] = useState<any>(user);
   useEffect(() => {
-    if (user) setCurrentUser(user);
+    if (user) {
+      setCurrentUser(user);
+      console.log(user);
+      console.log(session);
+      console.log(xuser);
+    }
   }, [user]);
   return (
     <>
@@ -45,7 +52,7 @@ const Navbar = () => {
               </div>
             </nav>
           </div>
-          <SectionsBar />
+          {pathname !== "/profile" ? <SectionsBar /> : null}
         </>
       )}
     </>

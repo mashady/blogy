@@ -6,11 +6,10 @@ import { getUserById } from "./data/user";
 import { getTwoFactorConfirmationById } from "./data/twoFactorConfirmation";
 import { getAccountByUserId } from "./data/account";
 import { isRedirectError } from "next/dist/client/components/redirect";
-/***
 
-### back to this file soon 
-
-*/
+/**
+ * ### back to this file soon
+ */
 
 export const {
   handlers: { GET, POST },
@@ -32,7 +31,7 @@ export const {
     },
   },
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ user, account }: any) {
       if (account?.provider !== "credentials") return true;
 
       const existingUser = await getUserById(user.id);
@@ -54,7 +53,7 @@ export const {
       return true;
     },
 
-    async session({ token, session }) {
+    async session({ token, session }: any) {
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }
@@ -70,6 +69,7 @@ export const {
         session.user.isOAuth = token.isOAuth;
       }
 
+      // Ensure the session callback returns a session object
       return session;
     },
 

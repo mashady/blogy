@@ -6,9 +6,13 @@ import Footer from "./_components/Footer";
 import NoInternetConnection from "./_components/NoInternetConnection ";
 import { useEffect } from "react";
 import DarkModeChecker from "./_components/DarkModeChecker";
-import { SessionProvider } from "next-auth/react";
+import { SessionProvider, useSession } from "next-auth/react";
 import { auth } from "@/auth";
+import { currentUser } from "@/lib/auth";
 
+import type { AppProps } from "next/app";
+import type { Session } from "next-auth";
+import Nav from "./_components/Nav";
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,15 +22,18 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
+  session: AppProps;
 }>) {
-  const session: any = auth();
+  const session = auth();
 
+  // fetch user session
+  // or we will add the session in the main navbar component then create another one in the second level as a client side one.
   return (
     <SessionProvider session={session}>
       <html lang="en">
         <body className="">
           <main className="text-[#0e0e0e] bg-[#fff] dark:bg-[#0e0e0e] dark:text-white ">
-            <Navbar />
+            <Nav />
             <DarkModeChecker />
             {/** check the dark mode status */}
             <main className="min-h-[calc(100vh-14rem-2px)]">{children}</main>
