@@ -14,7 +14,7 @@ const HomeHeader = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3">
       <HeroPost />
-      <FeaturePost />
+      <FeaturePost postsTitle="features" />
     </div>
   );
 };
