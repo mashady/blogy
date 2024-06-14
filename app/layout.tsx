@@ -9,7 +9,7 @@ import DarkModeChecker from "./_components/DarkModeChecker";
 import { SessionProvider, useSession } from "next-auth/react";
 import { auth } from "@/auth";
 import { currentUser } from "@/lib/auth";
-
+import { Toaster } from "@/components/ui/toaster";
 import type { AppProps } from "next/app";
 import type { Session } from "next-auth";
 import Nav from "./_components/Nav";
@@ -37,6 +37,7 @@ export default function RootLayout({
             <DarkModeChecker />
             {/** check the dark mode status */}
             <main className="min-h-[calc(100vh-14rem-2px)]">{children}</main>
+            <Toaster />
             <Footer />
           </main>
         </body>

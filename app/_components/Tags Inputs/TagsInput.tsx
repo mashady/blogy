@@ -1,22 +1,33 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import "./TagsInput.css";
 
-const TagsInput = ({ tagsP, selectedTags }: any) => {
-  const [tags, setTags] = React.useState(tagsP);
+const TagsInput = ({ tagsP, selectedTags, error }: any) => {
+  const [tags, setTags] = useState(tagsP);
 
   const removeTags = (indexToRemove: any) => {
-    setTags([...tags.filter((_: any, index: any) => index !== indexToRemove)]);
+    setTags(tags.filter((_: any, index: any) => index !== indexToRemove));
   };
+
   const addTags = (event: any) => {
-    if (event.target.value !== "" && !tags.includes(event.target.value)) {
-      setTags([...tags, event.target.value]);
-      selectedTags([...tags, event.target.value]);
-      event.target.value = "";
+    if (event.target.value !== "") {
+      const newTag = { name: event.target.value };
+      if (!tags.some((tag: any) => tag.name === newTag.name)) {
+        setTags([...tags, newTag]);
+        selectedTags([...tags, newTag]);
+        event.target.value = "";
+      }
     }
   };
+
   return (
-    <div className="tags-input bg-inherit items-center w-full border-[#4242423b] dark:border-[#fff] border-[1px]">
+    <div
+      className={`${
+        error
+          ? "border-[#dc3545] dark:border-[#dc3545]"
+          : "border-[#4242423b] dark:border-[white]"
+      } tags-input bg-inherit items-center w-full border-[1px]`}
+    >
       <input
         type="text"
         onKeyUp={(event) => (event.key === "Enter" ? addTags(event) : null)}
@@ -29,7 +40,7 @@ const TagsInput = ({ tagsP, selectedTags }: any) => {
             key={index}
             className="tag mr-2 mb-2 flex items-center justify-center"
           >
-            <span className="mb-[3px]">{tag}</span>
+            <span className="mb-[3px]">{tag.name}</span>
             <span className="ml-2" onClick={() => removeTags(index)}>
               <svg
                 width="15"

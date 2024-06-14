@@ -34,6 +34,7 @@ const PostForm = ({ post }: any) => {
       setSubmitting(true);
       if (post) await axios.patch("/api/posts" + post.id, data);
       else await axios.post("/api/posts", data);
+      console.log("new post added successfully");
       setSubmitting(false);
 
       router.push("/");
@@ -47,7 +48,8 @@ const PostForm = ({ post }: any) => {
 
   const selectedTags = (tags: any) => {
     // just take first tag
-    setValue("tags", tags[0], { shouldValidate: true });
+    console.log(tags);
+    setValue("tags", tags, { shouldValidate: true });
   };
   const sectionSelected = (value: any) => {
     console.log(value);
@@ -66,7 +68,7 @@ const PostForm = ({ post }: any) => {
     return {
       autofocus: true,
       spellChecker: false,
-    } as SimpleMDE.Options;
+    };
   }, []);
   return (
     <>
@@ -77,7 +79,11 @@ const PostForm = ({ post }: any) => {
           onKeyDown={preventEnterKeySubmission}
         >
           <input
-            className="bg-inherit text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white border-[#4242423b] dark:border-[#fff] border-[1px] outline-none rounded p-2 w-full mt-2"
+            className={`bg-inherit ${
+              errors.title
+                ? "border-[#dc3545] dark:border-[#dc3545] "
+                : "border-[#4242423b]  dark:border-[#fff] "
+            } text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white border-[1px] outline-none rounded p-2 w-full mt-2`}
             type="text"
             value={post?.title}
             {...register("title")}
@@ -85,7 +91,11 @@ const PostForm = ({ post }: any) => {
           />
           <span>{errors.title?.message}</span>
           <input
-            className="bg-inherit text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white border-[#4242423b] dark:border-[#fff] border-[1px] outline-none rounded p-2 w-full mt-2"
+            className={`bg-inherit ${
+              errors.slug
+                ? "border-[#dc3545] dark:border-[#dc3545] "
+                : "border-[#4242423b]  dark:border-[#fff] "
+            } text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white border-[1px] outline-none rounded p-2 w-full mt-2`}
             type="text"
             {...register("slug")}
             value={post?.slug}
@@ -93,7 +103,11 @@ const PostForm = ({ post }: any) => {
           />
           <span>{errors.slug?.message}</span>
           <input
-            className="bg-inherit text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white border-[#4242423b] dark:border-[#fff] border-[1px] outline-none rounded p-2 w-full mt-2"
+            className={`bg-inherit ${
+              errors.cover
+                ? "border-[#dc3545] dark:border-[#dc3545] "
+                : "border-[#4242423b]  dark:border-[#fff] "
+            } text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white border-[1px] outline-none rounded p-2 w-full mt-2`}
             type="text"
             {...register("cover")}
             value={post?.cover}
@@ -107,7 +121,11 @@ const PostForm = ({ post }: any) => {
 
           <span>{errors.section?.message}</span>
 
-          <TagsInput selectedTags={selectedTags} tagsP={[]} />
+          <TagsInput
+            selectedTags={selectedTags}
+            tagsP={[]}
+            error={errors.tags}
+          />
 
           <span>{errors.tags?.message}</span>
 

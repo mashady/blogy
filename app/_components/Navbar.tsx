@@ -19,9 +19,6 @@ const Navbar = ({ xuser }: any) => {
   useEffect(() => {
     if (user) {
       setCurrentUser(user);
-      console.log(user);
-      console.log(session);
-      console.log(xuser);
     }
   }, [user]);
   return (

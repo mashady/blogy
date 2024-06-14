@@ -14,7 +14,7 @@ const SelectInput = ({ sectionSelected }: any) => {
   return (
     <Select.Root onValueChange={handleSelect}>
       <Select.Trigger
-        className="inline-flex items-center justify-between rounded px-[15px] text-[14px] font-semibold leading-none  gap-[5px] bg-inherit border-[#4242423b] dark:border-[#fff] border-[1px] text-[#1f4d78]    data-[placeholder]:text-[#1f4d78] outline-none w-[300px] h-[50px]"
+        className="inline-flex items-center justify-between rounded px-[15px]  leading-none  gap-[5px] bg-inherit border-[#4242423b] dark:border-[#fff] border-[1px] text-[white]    data-[placeholder]:text-gray-700 dark:data-[placeholder]:text-[white] outline-none w-[300px] h-[50px]"
         aria-label="Food"
       >
         <Select.Value
@@ -22,7 +22,7 @@ const SelectInput = ({ sectionSelected }: any) => {
           className=""
           placeholder="Select a fruit…"
         />
-        <Select.Icon className="text-[#1f4d78]">
+        <Select.Icon className="text-gray-700 dark:text-white">
           <svg
             width="15"
             height="15"
@@ -40,17 +40,25 @@ const SelectInput = ({ sectionSelected }: any) => {
         </Select.Icon>
       </Select.Trigger>
       <Select.Portal>
-        <Select.Content className="overflow-hidden bg-white rounded-md shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)]">
-          <Select.ScrollUpButton className="flex items-center justify-center h-[25px] bg-white text-[#1f4d78] cursor-default">
+        <Select.Content className="mt-12 ml-2  overflow-hidden bg-white dark:bg-black rounded-md shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)]">
+          <Select.ScrollUpButton className="flex items-center justify-center h-[25px] bg-white dark:bg-black text-[black] dark:text-white cursor-default">
             <ChevronUpIcon />
           </Select.ScrollUpButton>
-          <Select.Viewport className="p-[5px]">
+          <Select.Viewport className="p-[5px] ">
             <Select.Group>
-              <SelectItem value="aubergine">Aubergine</SelectItem>
-              <SelectItem value="broccoli">Broccoli</SelectItem>
+              <SelectItem value="aubergine" className="text-white">
+                Aubergine
+              </SelectItem>
+              <SelectItem value="broccoli" className="text-white">
+                Broccoli
+              </SelectItem>
 
-              <SelectItem value="courgette">Courgette</SelectItem>
-              <SelectItem value="leek">Leek</SelectItem>
+              <SelectItem value="courgette" className="text-white">
+                Courgette
+              </SelectItem>
+              <SelectItem value="leek" className="text-white">
+                Leek
+              </SelectItem>
             </Select.Group>
           </Select.Viewport>
           <Select.ScrollDownButton className="flex items-center justify-center h-[25px] bg-white text-violet11 cursor-default">
