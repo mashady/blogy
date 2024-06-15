@@ -14,7 +14,7 @@ const SelectInput = ({ sectionSelected }: any) => {
   return (
     <Select.Root onValueChange={handleSelect}>
       <Select.Trigger
-        className="inline-flex items-center justify-between rounded px-[15px]  leading-none  gap-[5px] bg-inherit border-[#4242423b] dark:border-[#fff] border-[1px] text-[white]    data-[placeholder]:text-gray-700 dark:data-[placeholder]:text-[white] outline-none w-[300px] h-[50px]"
+        className="inline-flex items-center justify-between rounded px-[15px] leading-none  gap-[5px] bg-inherit border-[#4242423b] dark:border-[#fff] // if error add red bord border-[1px] text-[white]    data-[placeholder]:text-gray-700 dark:data-[placeholder]:text-[white] outline-none w-[300px] h-[50px]"
         aria-label="Food"
       >
         <Select.Value
