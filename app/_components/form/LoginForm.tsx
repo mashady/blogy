@@ -93,7 +93,7 @@ const LoginForm = () => {
             className="text-centers w-[300px]"
           >
             <div className="flex flex-col mb-2">
-              <label className="text-lg">Email</label>
+              <label className="text-lg capitalize">email</label>
               <input
                 type="text"
                 placeholder="enter your email address"
