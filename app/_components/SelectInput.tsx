@@ -40,23 +40,35 @@ const SelectInput = ({ sectionSelected }: any) => {
         </Select.Icon>
       </Select.Trigger>
       <Select.Portal>
-        <Select.Content className="mt-12 ml-2  overflow-hidden bg-white dark:bg-black rounded-md shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)]">
-          <Select.ScrollUpButton className="flex items-center justify-center h-[25px] bg-white dark:bg-black text-[black] dark:text-white cursor-default">
+        <Select.Content className="mt-12 ml-2  overflow-hidden border-[1px] text-black dark:text-white border-[#4242423b] dark:border-white   bg-white dark:bg-[#0e0e0e] rounded-md shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)]">
+          <Select.ScrollUpButton className="flex items-center justify-center h-[25px] bg-white dark:bg-black  cursor-default">
             <ChevronUpIcon />
           </Select.ScrollUpButton>
           <Select.Viewport className="p-[5px] ">
             <Select.Group>
-              <SelectItem value="aubergine" className="text-white">
+              <SelectItem
+                value="aubergine"
+                className="text-black dark:text-white hover:text-white"
+              >
                 Aubergine
               </SelectItem>
-              <SelectItem value="broccoli" className="text-white">
+              <SelectItem
+                value="broccoli"
+                className="text-black dark:text-white hover:text-white"
+              >
                 Broccoli
               </SelectItem>
 
-              <SelectItem value="courgette" className="text-white">
+              <SelectItem
+                value="courgette"
+                className="text-black dark:text-white hover:text-white"
+              >
                 Courgette
               </SelectItem>
-              <SelectItem value="leek" className="text-white">
+              <SelectItem
+                value="leek"
+                className="text-black dark:text-white hover:text-white"
+              >
                 Leek
               </SelectItem>
             </Select.Group>
@@ -92,3 +104,10 @@ const SelectItem = React.forwardRef(
 );
 
 export default SelectInput;
+/**
+ *
+ *
+ * #simplemde-editor-2-wrapper > div > div.CodeMirror.cm-s-easymde.CodeMirror-wrap.CodeMirror-empty
+ *
+ *
+ */

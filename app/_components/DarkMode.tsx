@@ -11,6 +11,13 @@ const DarkMode = () => {
       setDark(true);
       //console.log("lalal dark mode");
       document.body.classList.add("dark");
+      // Add styles to your specific class when dark mode is enabled
+      const editorWrapper = document.querySelector(
+        "#simplemde-editor-2-wrapper > div > div.CodeMirror.cm-s-easymde.CodeMirror-wrap.CodeMirror-empty"
+      );
+      if (editorWrapper) {
+        editorWrapper.classList.add("dark-mode-enabled");
+      }
     } else {
       setDark(false);
       //console.log("lalal light mode");
@@ -22,6 +29,14 @@ const DarkMode = () => {
     setDark(!dark);
     document.body.classList.toggle("dark");
     localStorage.setItem("dark", dark ? "lightMode" : "darkMode");
+
+    // Toggle styles for your specific class based on dark mode state
+    const editorWrapper = document.querySelector(
+      "#simplemde-editor-2-wrapper > div > div.CodeMirror.cm-s-easymde.CodeMirror-wrap.CodeMirror-empty"
+    );
+    if (editorWrapper) {
+      editorWrapper.classList.toggle("dark-mode-enabled", !dark);
+    }
     // }
   };
   return (
