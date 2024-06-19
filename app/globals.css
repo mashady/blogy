@@ -93,3 +93,14 @@ body.dark
   background-color: #0e0e0e !important;
   color: #fff;
 }
+
+body.dark
+  #simplemde-editor-2-wrapper
+  > div
+  > div.CodeMirror.cm-s-easymde.CodeMirror-wrap.CodeMirror-empty
+  > div.CodeMirror-scroll
+  > div.CodeMirror-sizer
+  > div
+  > div {
+  color: white !important;
+}
