@@ -135,7 +135,7 @@ const PostForm = ({ post }: any) => {
             defaultValue={post?.description}
             render={({ field }) => (
               <SimpleMDE
-                placeholder="Description"
+                placeholder=""
                 options={autofocusNoSpellcheckerOptions}
                 {...field}
               />
