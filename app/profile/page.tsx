@@ -49,7 +49,7 @@ const page = () => {
                 </li>
                 <DropdownMenuSeparator />
                 <li>
-                  <Link href="settings/profile">settings</Link>
+                  <Link href="settings/profile">setting</Link>
                 </li>
               </ul>
             </DropdownMenuContent>

@@ -73,6 +73,7 @@ const PostForm = ({ post }: any) => {
   return (
     <>
       <div className="max-w-xl">
+        <div className="text-3xl mb-4">New post</div>
         <form
           className="space-y-3 mb-6"
           onSubmit={onSubmit}
@@ -147,7 +148,7 @@ const PostForm = ({ post }: any) => {
             className="flex items-center justify-between gap-3 bg-[#1f4d78] text-white rounded w-full h-[50px] px-4"
             disabled={isSubmitting}
           >
-            {post ? "Update Post" : "Submit New Post"}{" "}
+            {post ? "Update" : "Post"}{" "}
             {isSubmitting && (
               <div className="inline-flex">
                 <span className="loader"></span>
