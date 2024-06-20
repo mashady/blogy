@@ -145,7 +145,7 @@ const PostForm = ({ post }: any) => {
           <span>{errors.description?.message}</span>
 
           <button
-            className="flex items-center justify-between gap-3 bg-[#1f4d78] text-white rounded w-full h-[50px] px-4"
+            className="flex items-center justify-center gap-3 bg-[#1f4d78] text-white rounded w-[100px] h-[50px] px-4"
             disabled={isSubmitting}
           >
             {post ? "Update" : "Post"}{" "}

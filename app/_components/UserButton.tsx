@@ -25,8 +25,8 @@ export function UserButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="sec">
-          <FaUserCircle className="text-xl" />
+        <Button variant="sec" className="text-red-300">
+          <FaUserCircle className="text-xl text-white" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
