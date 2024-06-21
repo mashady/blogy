@@ -12,7 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { postSchema } from "@/app/ValidationSchemas";
 import "easymde/dist/easymde.min.css";
 import SimpleMDE from "react-simplemde-editor";
-
+import ErrorMessage from "./ErrorMessage";
 type PostFormData = z.infer<typeof postSchema>;
 
 const PostForm = ({ post }: any) => {
@@ -80,58 +80,48 @@ const PostForm = ({ post }: any) => {
           onKeyDown={preventEnterKeySubmission}
         >
           <input
-            className={`bg-inherit ${
-              errors.title
-                ? "border-[#dc3545] dark:border-[#dc3545] "
-                : "border-[#4242423b]  dark:border-[#fff] "
-            } text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white border-[1px] outline-none rounded p-2 w-full mt-2`}
+            className={`bg-inherit  border-[#4242423b]  dark:border-[#fff] text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white border-[1px] outline-none rounded p-2 w-full mt-2`}
             type="text"
             value={post?.title}
             {...register("title")}
             placeholder="Name your title"
           />
-          <span>{errors.title?.message}</span>
+          {errors.title && (
+            <ErrorMessage message={errors.title?.message as string} />
+          )}
+
           <input
-            className={`bg-inherit ${
-              errors.slug
-                ? "border-[#dc3545] dark:border-[#dc3545] "
-                : "border-[#4242423b]  dark:border-[#fff] "
-            } text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white border-[1px] outline-none rounded p-2 w-full mt-2`}
+            className={`bg-inherit border-[#4242423b]  dark:border-[#fff] text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white border-[1px] outline-none rounded p-2 w-full mt-2`}
             type="text"
             {...register("slug")}
             value={post?.slug}
             placeholder="Write your own link slug"
           />
-          <span>{errors.slug?.message}</span>
+          {errors.slug && (
+            <ErrorMessage message={errors.slug?.message as string} />
+          )}
           <input
-            className={`bg-inherit ${
-              errors.cover
-                ? "border-[#dc3545] dark:border-[#dc3545] "
-                : "border-[#4242423b]  dark:border-[#fff] "
-            } text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white border-[1px] outline-none rounded p-2 w-full mt-2`}
+            className={`bg-inherit border-[#4242423b]  dark:border-[#fff] text-gray-700 dark:text-white placeholder-gray-700 dark:placeholder-white border-[1px] outline-none rounded p-2 w-full mt-2`}
             type="text"
             {...register("cover")}
             value={post?.cover}
             placeholder="Put your own cover link ex: http://example.com"
           />
-          <span>{errors.cover?.message}</span>
+          {errors.cover && (
+            <ErrorMessage message={errors.cover?.message as string} />
+          )}
           <div>
-            <SelectInput
-              sectionSelected={sectionSelected}
-              error={errors.section}
-            />
+            <SelectInput sectionSelected={sectionSelected} />
             {}
           </div>
+          {errors.section && (
+            <ErrorMessage message={errors.section?.message as string} />
+          )}
 
-          <span>{errors.section?.message}</span>
-
-          <TagsInput
-            selectedTags={selectedTags}
-            tagsP={[]}
-            error={errors.tags}
-          />
-
-          <span>{errors.tags?.message}</span>
+          <TagsInput selectedTags={selectedTags} tagsP={[]} />
+          {errors.tags && (
+            <ErrorMessage message={errors.tags?.message as string} />
+          )}
 
           <Controller
             name="description"
@@ -145,7 +135,9 @@ const PostForm = ({ post }: any) => {
               />
             )}
           />
-          <span>{errors.description?.message}</span>
+          {errors.description && (
+            <ErrorMessage message={errors.description?.message as string} />
+          )}
 
           <button
             className="flex items-center justify-center gap-3 bg-[#1f4d78] text-white rounded w-[100px] h-[50px] px-4"
