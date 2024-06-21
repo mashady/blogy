@@ -116,7 +116,10 @@ const PostForm = ({ post }: any) => {
           />
           <span>{errors.cover?.message}</span>
           <div>
-            <SelectInput sectionSelected={sectionSelected} />
+            <SelectInput
+              sectionSelected={sectionSelected}
+              error={errors.section}
+            />
             {}
           </div>
 
