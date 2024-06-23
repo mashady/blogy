@@ -29,13 +29,24 @@ model Post {
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
   assignedToUserId String?  @db.VarChar(255)
-  tags             Tag[]
+  assignedToUser   User?    @relation(fields: [assignedToUserId], references: [id])
+  //tags      PostTag[]
 }
 
 model Tag {
-  id   Int @id @default(autoincrement())
-  name String 
-  posts Post[]
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  posts     PostTag[]
+}
+
+
+model PostTag {
+  postId Int
+ // post   Post @relation(fields: [postId], references: [id])
+  tagId  Int
+  tag    Tag @relation(fields: [tagId], references: [id])
+
+  @@id([postId, tagId])
 }
 
 model Account {
@@ -69,6 +80,7 @@ model User {
   accounts      Account[]
   isTwoFactorEnabled Boolean @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
+  posts Post[]
 }
 
 model VerificationToken{

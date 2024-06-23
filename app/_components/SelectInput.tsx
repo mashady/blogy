@@ -7,13 +7,13 @@ import {
   ChevronUpIcon,
 } from "@radix-ui/react-icons";
 
-const SelectInput = ({ sectionSelected, error }: any) => {
+const SelectInput = ({ sectionSelected, error, defaultValue }: any) => {
   const handleSelect = (value: any) => {
     sectionSelected(value);
   };
   return (
     //border-[#4242423b] dark:border-[red]
-    <Select.Root onValueChange={handleSelect}>
+    <Select.Root onValueChange={handleSelect} defaultValue={defaultValue}>
       <Select.Trigger
         className={`${
           error

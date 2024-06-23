@@ -14,8 +14,8 @@ export async function POST(req: NextRequest) {
       cover: body.cover,
       description: body.description,
       section: body.section,
-      //tags: { create: [{ name: "dev" }, { name: "king-abusamir" }] },
-      tags: { create: body.tags },
+      //tags: { create: body.tags },
+      assignedToUserId: body.user,
     },
   });
   return NextResponse.json(newPost, { status: 201 });

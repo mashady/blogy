@@ -30,18 +30,25 @@ const fetchPosts = cache((postSlug: string) =>
 
 const PostDetailsPage = async ({ params }: Props) => {
   const post = await fetchPosts(params.slug);
+  if (post) console.log(post);
   if (!post) notFound();
   return (
     <MaxWidthWrapper>
+      {JSON.stringify(post)}
       <Scroll />
-      <PostTags />
-      <PostTitle />
+      <PostTags tag={post?.section} />
+      <PostTitle title={post?.title} />
       <div className="grid grid-cols-1 lg:grid-cols-3">
         <div className="col-span-2">
-          <PostDetails />
-          <PostImage />
-          <PostSubject />
-          <PostComments />
+          <PostDetails postCreated={post} />
+          <PostImage cover={post?.cover} />
+          <PostSubject subject={post?.description} />
+          {/** this feature will be suspended for now and will be added in another version
+           * <PostComments />
+           *
+           *
+           *
+           */}
         </div>
         <div>
           <FeaturePost />

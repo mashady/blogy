@@ -16,9 +16,9 @@ export const postSchema = z.object({
     .refine((s) => !s.includes(" "), "Enter a valid URL"),
   section: z.string().min(1, "section is required").max(255),
   //tags: z.string(),
-  tags: z.array(tagSchema).min(1, "tags is required"),
+  //tags: z.array(tagSchema).min(1, "tags is required"),
   description: z.string().min(1, "Description is required.").max(65535),
-  //user: z.string().min(1, "User is required"),
+  user: z.string().min(1, "User is required"),
 });
 export const testSchema = z.object({
   title: z.string().min(1, "title is required").max(255),

@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { LiaComments } from "react-icons/lia";
 
-const PostDetails = () => {
+const PostDetails = ({ post }: any) => {
   return (
     <div className="flex items-center">
       <div className="inline-flex h-[45px]  mr-4 w-[45px] select-none items-center justify-center overflow-hidden rounded-full align-middle">
@@ -20,7 +20,8 @@ const PostDetails = () => {
         <span className="mx-2">|</span>
         <span>Apr 1 2024 - 7:44 am PT</span>
       </div>
-      <div className="flex items-center ml-4 font-simi-bold">
+      {/**this feature will be suspended for now and will be added in another version
+       * <div className="flex items-center ml-4 font-simi-bold">
         <span>
           <LiaComments className="text-xl  mr-2" />
         </span>
@@ -28,6 +29,8 @@ const PostDetails = () => {
           <Link href="">47 comments</Link>
         </span>
       </div>
+       * 
+       */}
     </div>
   );
 };

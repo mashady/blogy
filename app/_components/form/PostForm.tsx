@@ -5,6 +5,7 @@ import SelectInput from "../SelectInput";
 import TagsInput from "../Tags Inputs/TagsInput";
 import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
+import { useToast } from "@/components/ui/use-toast";
 
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -13,10 +14,15 @@ import { postSchema } from "@/app/ValidationSchemas";
 import "easymde/dist/easymde.min.css";
 import SimpleMDE from "react-simplemde-editor";
 import ErrorMessage from "./ErrorMessage";
+import prisma from "@/prisma/client";
+import { currentUser } from "@/lib/auth";
+import { useCurrentUser } from "../hooks/useCurrentUser";
 type PostFormData = z.infer<typeof postSchema>;
 
-const PostForm = ({ post }: any) => {
+const PostForm = ({ post, postTags }: any) => {
+  const user = useCurrentUser();
   const router = useRouter();
+  const { toast } = useToast();
   const {
     register,
     control,
@@ -28,6 +34,11 @@ const PostForm = ({ post }: any) => {
   });
   const [error, setError] = useState("");
   const [isSubmitting, setSubmitting] = useState(false);
+  const [thePostTags, setPostTags] = useState<any>(null);
+  useEffect(() => {
+    console.log(user);
+    setValue("user", user?.id!);
+  }, [user]);
 
   const onSubmit = handleSubmit(async (data, e) => {
     try {
@@ -36,7 +47,10 @@ const PostForm = ({ post }: any) => {
       else await axios.post("/api/posts", data);
       console.log("new post added successfully");
       setSubmitting(false);
-
+      toast({
+        title: "New post added successfully",
+        description: "Friday, February 10, 2023 at 5:57 PM",
+      });
       router.push("/");
       router.refresh();
     } catch (error) {
@@ -49,7 +63,7 @@ const PostForm = ({ post }: any) => {
   const selectedTags = (tags: any) => {
     // just take first tag
     console.log(tags);
-    setValue("tags", tags, { shouldValidate: true });
+    //setValue("tags", tags, { shouldValidate: true });
   };
   const sectionSelected = (value: any) => {
     console.log(value);
@@ -111,17 +125,29 @@ const PostForm = ({ post }: any) => {
             <ErrorMessage message={errors.cover?.message as string} />
           )}
           <div>
-            <SelectInput sectionSelected={sectionSelected} />
+            <SelectInput
+              sectionSelected={sectionSelected}
+              defaultValue={post?.section}
+            />
             {}
           </div>
           {errors.section && (
             <ErrorMessage message={errors.section?.message as string} />
           )}
 
-          <TagsInput selectedTags={selectedTags} tagsP={[]} />
+          {/**
+           * this feature will be disabled for now and will be activated in another versions
+          <TagsInput
+            selectedTags={selectedTags}
+            tagsP={[]}
+            defaultValue={postTags}
+          />
           {errors.tags && (
             <ErrorMessage message={errors.tags?.message as string} />
           )}
+           * 
+           * 
+           */}
 
           <Controller
             name="description"
@@ -138,7 +164,8 @@ const PostForm = ({ post }: any) => {
           {errors.description && (
             <ErrorMessage message={errors.description?.message as string} />
           )}
-
+          {errors.user?.message}
+          {JSON.stringify(errors)}
           <button
             className="flex items-center justify-center gap-3 bg-[#1f4d78] text-white rounded w-[100px] h-[50px] px-4"
             disabled={isSubmitting}

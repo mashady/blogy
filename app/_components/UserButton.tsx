@@ -39,6 +39,10 @@ export function UserButton() {
             <Link href="settings/profile">settings</Link>
           </li>
           <DropdownMenuSeparator />
+          <li>
+            <Link href="new-post">New Post</Link>
+          </li>
+          <DropdownMenuSeparator />
 
           <li className="flex items-center " onClick={handleLogOut}>
             <IoLogOutOutline className="text-lg mr-2 cursor-pointer" />
