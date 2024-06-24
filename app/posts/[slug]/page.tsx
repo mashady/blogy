@@ -54,6 +54,7 @@ const PostDetailsPage = async ({ params }: Props) => {
               postCreated={post}
               userName={post.assignedToUser.name}
               userImage={post.assignedToUser.image}
+              postDate={post.createdAt}
             />
           )}
 

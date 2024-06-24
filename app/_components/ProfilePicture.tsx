@@ -27,19 +27,20 @@ const ProfilePicture = ({ url, imageStyle, placeholderStyle }: any) => {
   return (
     <div className="w-full h-full">
       {isValid === true && <img className={imageStyle} src={url} />}
-      {isValid === false && (
-        <div className={placeholderStyle}>
-          <div className="">
-            <RxAvatar
-              className={`${
-                pathname.includes("/posts")
-                  ? "text-2xl text-sec"
-                  : "text-4xl text-sec"
-              }`}
-            />
+      {isValid === false ||
+        (isValid === null && (
+          <div className={placeholderStyle}>
+            <div className="">
+              <RxAvatar
+                className={`${
+                  pathname.includes("/posts")
+                    ? "text-2xl text-sec"
+                    : "text-4xl text-sec"
+                }`}
+              />
+            </div>
           </div>
-        </div>
-      )}
+        ))}
     </div>
   );
 };

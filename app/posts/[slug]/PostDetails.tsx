@@ -8,8 +8,9 @@ import React, { useEffect, useState } from "react";
 import { LiaComments } from "react-icons/lia";
 import { FcRemoveImage } from "react-icons/fc";
 import ProfilePicture from "@/app/_components/ProfilePicture";
-
-const PostDetails = ({ post, userName, userImage }: any) => {
+import { formatDate } from "@/lib/formatDate";
+const PostDetails = ({ post, userName, userImage, postDate }: any) => {
+  const formattedDate = formatDate(postDate);
   /**
    *   const [validImage, setIsValidImage] = useState<any>(null);
   useEffect(() => {
@@ -61,7 +62,7 @@ const PostDetails = ({ post, userName, userImage }: any) => {
           </Link>
         </span>
         <span className="mx-2">|</span>
-        <span>Apr 1 2024 - 7:44 am PT</span>
+        <span>{formattedDate}</span>
       </div>
       {/**this feature will be suspended for now and will be added in another version
        * <div className="flex items-center ml-4 font-simi-bold">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MaxWidthWrapper from "../_components/MaxWidthWrapper";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { RxAvatar } from "react-icons/rx";
@@ -17,9 +17,13 @@ import Link from "next/link";
 import FeaturePost from "../_components/FeaturePost";
 import { currentUser } from "@/lib/auth";
 import ProfilePicture from "../_components/ProfilePicture";
+import prisma from "@/prisma/client";
+import { getPostsById } from "@/actions/posts/id";
+import PorfilePosts from "../_components/PorfilePosts";
 const page = async () => {
   const user = await currentUser();
-
+  //const res = await fetch(`http://localhost:3000/api/posts/${user?.id}`);
+  getPostsById(user?.id).then((posts) => console.log(posts));
   return (
     <MaxWidthWrapper>
       <div className="relative">
@@ -33,7 +37,7 @@ const page = async () => {
              * 
              */}
             <ProfilePicture
-              url="https://i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2024/04/siri-dumpster-fire-1.jpg?w=1500&quality=82&strip=all&ssl=1"
+              url={user?.image}
               imageStyle="object-cover h-full"
               placeholderStyle="text-4xl text-sec w-full h-full flex justify-center items-center"
             />
@@ -70,7 +74,7 @@ const page = async () => {
         </div>
       </div>
       <div className="mb-4">
-        <FeaturePost postsTitle="posts" />
+        <PorfilePosts id={user?.id} />
       </div>
     </MaxWidthWrapper>
   );

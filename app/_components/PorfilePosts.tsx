@@ -1,38 +1,19 @@
+"use client";
+import React, { useEffect, useState } from "react";
+import { getPostsById } from "@/actions/posts/id";
 import Link from "next/link";
-import React from "react";
-// will be replaced with props
-const fakePosts = [
-  {
-    title:
-      "Siri in iOS 18: An AI revolution, or a sometimes useful dumpster fire?",
-    cover:
-      "https://i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2024/04/find-my-repair.jpg",
-    author: "Zac Hall",
-    date: "Apr 1 2024",
-  },
-  {
-    title:
-      "Siri in iOS 18: An AI revolution, or a sometimes useful dumpster fire?",
-    cover:
-      "https://i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2024/04/find-my-repair.jpg",
-    author: "Zac Hall",
-    date: "Apr 1 2024",
-  },
-  {
-    title:
-      "Siri in iOS 18: An AI revolution, or a sometimes useful dumpster fire?",
-    cover:
-      "https://i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2024/04/find-my-repair.jpg",
-    author: "Zac Hall",
-    date: "Apr 1 2024",
-  },
-];
-// this will be change to posts collection
-const FeaturePost = ({ postsTitle, posts }: any) => {
+const PorfilePosts = ({ id }: any) => {
+  const [posts, setPosts] = useState<any>([]);
+  useEffect(() => {
+    getPostsById(id).then((posts) => {
+      console.log(posts);
+      setPosts(posts);
+    });
+  }, [id]);
   return (
     <div>
-      <h1 className="text-4xl font-bold mt-[3rem] capitalize">{postsTitle}</h1>
-      {fakePosts.map((post, i) => {
+      <h1 className="text-4xl font-bold mt-[3rem] capitalize">Posts</h1>
+      {posts?.map((post: any, i: any) => {
         return (
           <div key={i} className={i === 1 ? "border-y-[1px]" : ""}>
             <div className="flex mt-4 pb-2">
@@ -64,4 +45,4 @@ const FeaturePost = ({ postsTitle, posts }: any) => {
   );
 };
 
-export default FeaturePost;
+export default PorfilePosts;
