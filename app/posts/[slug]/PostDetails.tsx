@@ -7,9 +7,11 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { LiaComments } from "react-icons/lia";
 import { FcRemoveImage } from "react-icons/fc";
+import ProfilePicture from "@/app/_components/ProfilePicture";
 
 const PostDetails = ({ post, userName, userImage }: any) => {
-  const [validImage, setIsValidImage] = useState<any>(null);
+  /**
+   *   const [validImage, setIsValidImage] = useState<any>(null);
   useEffect(() => {
     isValidImage(userImage).then((validImage) => {
       if (validImage) {
@@ -23,9 +25,14 @@ const PostDetails = ({ post, userName, userImage }: any) => {
       isValidImage(userImage).then(setIsValidImage);
     }
   }, [userImage]);
+   * 
+   * 
+   */
+
   return (
     <div className="flex items-center">
-      <div className="inline-flex h-[45px]  mr-4 w-[45px] select-none items-center justify-center overflow-hidden rounded-full align-middle">
+      {/**
+       * <div className="inline-flex h-[45px]  mr-4 w-[45px] select-none items-center justify-center overflow-hidden rounded-full align-middle">
         {validImage ? (
           <img
             className="h-full w-full rounded-[inherit] object-cover"
@@ -37,6 +44,15 @@ const PostDetails = ({ post, userName, userImage }: any) => {
             <CgProfile className="text-xl" />
           </div>
         )}
+      </div>
+       * 
+       */}
+      <div className="inline-flex h-[45px]  mr-4 w-[45px] select-none items-center justify-center overflow-hidden rounded-full align-middle">
+        <ProfilePicture
+          url={userImage}
+          imageStyle="h-full w-full rounded-[inherit] object-cover"
+          placeholderStyle="bg-[#1e293b] text-[10px] text-sec  w-full h-full flex justify-center items-center"
+        />
       </div>
       <div className="text-[0.9rem]">
         <span className="font-semibold capitalize  hover:text-[#1f4d78] hover:underline transition-all">

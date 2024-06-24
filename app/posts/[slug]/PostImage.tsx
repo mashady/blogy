@@ -31,7 +31,7 @@ const PostImage = ({ cover }: any) => {
       {isValid === false && (
         <div className="bg-sec rounded my-4 h-[400px] flex justify-center items-center">
           <div className="flex flex-col items-center">
-            <FcRemoveImage className="text-4xl" />
+            <FcRemoveImage className="text-4xl text-sec" />
             <p>The link is not a valid image link.</p>
           </div>
         </div>
