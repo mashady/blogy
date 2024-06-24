@@ -8,21 +8,14 @@ import MaxWidthWrapper from "@/app/_components/MaxWidthWrapper";
 const Post = async ({ searchParams }: any) => {
   const posts = await prisma.post.findMany({
     where: {
-      tags: {
-        some: {
-          name: searchParams.tag,
-        },
-      },
-      section: {
-        contains: searchParams.section,
-      },
+      section: searchParams.section,
     },
   });
   if (posts.length === 0) notFound();
-  console.log(posts);
   return (
     /** create the list issues */
     <MaxWidthWrapper>
+      {JSON.stringify(posts.length)}
       <div className="grid grid-cols-1 lg:grid-cols-3">
         <div className="col-span-2">
           <h1 className="text-4xl font-bold capitalize mt-[3rem] mb-2 ">
