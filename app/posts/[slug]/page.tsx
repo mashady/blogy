@@ -43,7 +43,6 @@ const PostDetailsPage = async ({ params }: Props) => {
   return (
     <MaxWidthWrapper>
       {JSON.stringify(post)}
-      {JSON.stringify(user)}
       <Scroll />
       <PostTags tag={post?.section} />
       <PostTitle title={post?.title} />

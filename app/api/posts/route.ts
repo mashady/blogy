@@ -2,11 +2,25 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/client";
 import { postSchema } from "@/app/ValidationSchemas";
 
-export async function POST(req: NextRequest) {
+// Helper function to add CORS headers to the response
+const addCorsHeaders = (response) => {
+  response.headers.set("Access-Control-Allow-Origin", "*");
+  response.headers.set("Access-Control-Allow-Methods", "GET,HEAD,POST");
+  response.headers.set("Access-Control-Allow-Headers", "Content-Type");
+  return response;
+};
+
+// API Route to handle POST requests
+export async function POST(req) {
   const body = await req.json();
   const validation = postSchema.safeParse(body);
-  if (!validation.success)
-    return NextResponse.json(validation.error.format(), { status: 400 });
+
+  if (!validation.success) {
+    return addCorsHeaders(
+      NextResponse.json(validation.error.format(), { status: 400 })
+    );
+  }
+
   const newPost = await prisma.post.create({
     data: {
       title: body.title,
@@ -14,9 +28,34 @@ export async function POST(req: NextRequest) {
       cover: body.cover,
       description: body.description,
       section: body.section,
-      //tags: { create: body.tags },
       assignedToUserId: body.user,
     },
   });
-  return NextResponse.json(newPost, { status: 201 });
+
+  return addCorsHeaders(NextResponse.json(newPost, { status: 201 }));
+}
+
+// API Route to handle GET requests
+export async function GET(req) {
+  const userId = req.nextUrl.searchParams.get("id");
+
+  if (!userId) {
+    return addCorsHeaders(
+      NextResponse.json({ error: "User ID is required" }, { status: 400 })
+    );
+  }
+
+  const posts = await prisma.post.findMany({
+    where: { assignedToUserId: userId },
+    include: {
+      assignedToUser: true,
+    },
+  });
+
+  return addCorsHeaders(NextResponse.json(posts, { status: 200 }));
+}
+
+// Handling OPTIONS method for preflight requests
+export async function OPTIONS() {
+  return addCorsHeaders(NextResponse.json(null, { status: 204 }));
 }

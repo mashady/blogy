@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { isValidImage } from "@/lib/isValidImage";
 import { FcRemoveImage } from "react-icons/fc";
-
+import Image from "next/image";
 const PostImage = ({ cover }: any) => {
   const [isValid, setIsValid] = useState<any>(null);
   const url =
@@ -24,10 +24,18 @@ const PostImage = ({ cover }: any) => {
   // Example usage:
 
   // handle if the cover url not found or not loaded so here we will use a placeholder
+  // old image <img className="rounded my-4 h-[400px]" src={url} />
   return (
     <div className="pr-6">
       {isValid === null && <p>Checking...</p>}
-      {isValid === true && <img className="rounded my-4 h-[400px]" src={url} />}
+      {isValid === true && (
+        <Image
+          src="https://images.unsplash.com/photo-1533167649158-6d508895b680?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="Cover of the post"
+          width={500}
+          height={500}
+        />
+      )}
       {isValid === false && (
         <div className="bg-sec rounded my-4 h-[400px] flex justify-center items-center">
           <div className="flex flex-col items-center">

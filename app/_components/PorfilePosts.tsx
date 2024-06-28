@@ -2,18 +2,36 @@
 import React, { useEffect, useState } from "react";
 import { getPostsById } from "@/actions/posts/id";
 import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 const PorfilePosts = ({ id }: any) => {
-  const [posts, setPosts] = useState<any>([]);
+  //const [posts, setPosts] = useState<any>([]);
+
+  const {
+    data: userPosts,
+    error,
+    isLoading,
+  } = useQuery<any>({
+    queryKey: ["posts", id], // handle fetching data by id
+    queryFn: () => axios.get(`/api/posts?id=${id}`).then((posts) => posts.data),
+    staleTime: 60 * 10000, // means the time takes to not consider the cashing
+    retry: 3, // another three tries if there an error
+  });
+  if (isLoading) return <div>loading....</div>;
+  //if (error) return null;
+  /*
   useEffect(() => {
     getPostsById(id).then((posts) => {
       console.log(posts);
       setPosts(posts);
     });
-  }, [id]);
+  }, [id]);*/
   return (
     <div>
-      <h1 className="text-4xl font-bold mt-[3rem] capitalize">Posts</h1>
-      {posts?.map((post: any, i: any) => {
+      <h1 className="text-4xl font-bold mt-[3rem] capitalize">Posts {id}</h1>
+      {userPosts?.length}
+      {JSON.stringify(userPosts)}
+      {userPosts?.map((post: any, i: any) => {
         return (
           <div key={i} className={i === 1 ? "border-y-[1px]" : ""}>
             <div className="flex mt-4 pb-2">

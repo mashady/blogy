@@ -13,6 +13,7 @@ import { Toaster } from "@/components/ui/toaster";
 import type { AppProps } from "next/app";
 import type { Session } from "next-auth";
 import Nav from "./_components/Nav";
+import QueryClientProvider from "./QueryClientProvider";
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -32,14 +33,16 @@ export default function RootLayout({
     <SessionProvider session={session}>
       <html lang="en">
         <body className="">
-          <main className="text-[#0e0e0e] bg-[#fff] dark:bg-[#0e0e0e] dark:text-white ">
-            <Nav />
-            <DarkModeChecker />
-            {/** check the dark mode status */}
-            <main className="min-h-[calc(100vh-14rem-2px)]">{children}</main>
-            <Toaster />
-            <Footer />
-          </main>
+          <QueryClientProvider>
+            <main className="text-[#0e0e0e] bg-[#fff] dark:bg-[#0e0e0e] dark:text-white ">
+              <Nav />
+              <DarkModeChecker />
+              {/** check the dark mode status */}
+              <main className="min-h-[calc(100vh-14rem-2px)]">{children}</main>
+              <Toaster />
+              <Footer />
+            </main>
+          </QueryClientProvider>
         </body>
       </html>
     </SessionProvider>

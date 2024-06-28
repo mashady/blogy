@@ -19,7 +19,7 @@ const Post = async ({ searchParams }: any) => {
       <div className="grid grid-cols-1 lg:grid-cols-3">
         <div className="col-span-2">
           <h1 className="text-4xl font-bold capitalize mt-[3rem] mb-2 ">
-            section title
+            {searchParams.section}
           </h1>
           <LatestPost />
           <LatestPost />
