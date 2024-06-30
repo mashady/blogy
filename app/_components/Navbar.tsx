@@ -49,7 +49,7 @@ const Navbar = ({ xuser }: any) => {
               </div>
             </nav>
           </div>
-          {pathname !== "/profile" ? <SectionsBar /> : null}
+          {pathname.includes("profile") ? null : <SectionsBar />}
         </>
       )}
     </>

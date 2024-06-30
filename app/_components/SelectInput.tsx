@@ -25,7 +25,7 @@ const SelectInput = ({ sectionSelected, error, defaultValue }: any) => {
         <Select.Value
           onChange={handleSelect}
           className=""
-          placeholder="Select a fruit…"
+          placeholder="Select a section"
         />
         <Select.Icon className="text-gray-700 dark:text-white">
           <svg
@@ -52,29 +52,53 @@ const SelectInput = ({ sectionSelected, error, defaultValue }: any) => {
           <Select.Viewport className="p-[5px] ">
             <Select.Group>
               <SelectItem
-                value="aubergine"
+                value="iphone"
                 className="text-black dark:text-white hover:text-white"
               >
-                Aubergine
+                Iphone
               </SelectItem>
               <SelectItem
-                value="broccoli"
+                value="vision"
                 className="text-black dark:text-white hover:text-white"
               >
-                Broccoli
+                Vision
               </SelectItem>
 
               <SelectItem
-                value="courgette"
+                value="mac"
                 className="text-black dark:text-white hover:text-white"
               >
-                Courgette
+                Mac
               </SelectItem>
               <SelectItem
-                value="leek"
+                value="watch"
                 className="text-black dark:text-white hover:text-white"
               >
-                Leek
+                Watch
+              </SelectItem>
+              <SelectItem
+                value="ipad"
+                className="text-black dark:text-white hover:text-white"
+              >
+                Ipad
+              </SelectItem>
+              <SelectItem
+                value="tv"
+                className="text-black dark:text-white hover:text-white"
+              >
+                TV
+              </SelectItem>
+              <SelectItem
+                value="applestore"
+                className="text-black dark:text-white hover:text-white"
+              >
+                Apple store
+              </SelectItem>
+              <SelectItem
+                value="appleone"
+                className="text-black dark:text-white hover:text-white"
+              >
+                Apple one
               </SelectItem>
             </Select.Group>
           </Select.Viewport>

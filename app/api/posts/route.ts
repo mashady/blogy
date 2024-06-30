@@ -51,8 +51,15 @@ export async function GET(req) {
       assignedToUser: true,
     },
   });
-
-  return addCorsHeaders(NextResponse.json(posts, { status: 200 }));
+  const transformedPosts = posts.map((post) => ({
+    ...post,
+    assignedToUser: {
+      id: post.assignedToUser?.id,
+      name: post.assignedToUser?.name,
+      email: post.assignedToUser?.email, // Include only the fields you want to expose
+    },
+  }));
+  return addCorsHeaders(NextResponse.json(transformedPosts, { status: 200 }));
 }
 
 // Handling OPTIONS method for preflight requests

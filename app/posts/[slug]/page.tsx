@@ -35,30 +35,38 @@ const fetchPosts = cache((postSlug: string) =>
 );
 
 const PostDetailsPage = async ({ params }: Props) => {
-  const user = await currentUser();
-
   const post = await fetchPosts(params.slug);
-  if (post) console.log(post);
-  if (!post) notFound();
+
+  const transformedPost = {
+    ...post,
+    assignedToUser: {
+      id: post?.assignedToUser?.id,
+      name: post?.assignedToUser?.name,
+      email: post?.assignedToUser?.email, // Include only the fields you want to expose
+      image: post?.assignedToUser?.image, // Include only the fields you want to expose
+    },
+  };
+
+  if (!transformedPost) notFound();
   return (
     <MaxWidthWrapper>
-      {JSON.stringify(post)}
       <Scroll />
-      <PostTags tag={post?.section} />
+      <PostTags tag={transformedPost?.section} />
       <PostTitle title={post?.title} />
       <div className="grid grid-cols-1 lg:grid-cols-3">
         <div className="col-span-2">
-          {post.assignedToUser && (
+          {transformedPost?.assignedToUser && (
             <PostDetails
+              userId={transformedPost.assignedToUser.id}
               postCreated={post}
-              userName={post.assignedToUser.name}
-              userImage={post.assignedToUser.image}
-              postDate={post.createdAt}
+              userName={transformedPost.assignedToUser.name}
+              userImage={transformedPost.assignedToUser?.image}
+              postDate={transformedPost.createdAt}
             />
           )}
 
-          <PostImage cover={post?.cover} />
-          <PostSubject subject={post?.description} />
+          <PostImage cover={transformedPost?.cover} />
+          <PostSubject subject={transformedPost?.description} />
           {/** this feature will be suspended for now and will be added in another version
            * <PostComments />
            *
@@ -66,8 +74,8 @@ const PostDetailsPage = async ({ params }: Props) => {
            *
            */}
         </div>
-        <div>
-          <FeaturePost />
+        <div className="mt-3">
+          <FeaturePost postsTitle="Features Posts" />
         </div>
       </div>
     </MaxWidthWrapper>

@@ -3,13 +3,15 @@ import { useState, useEffect } from "react";
 import { isValidImage } from "@/lib/isValidImage";
 import { FcRemoveImage } from "react-icons/fc";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 const PostImage = ({ cover }: any) => {
   const [isValid, setIsValid] = useState<any>(null);
+  const pathname = usePathname();
   const url =
     "https://i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2024/04/siri-dumpster-fire-1.jpg?w=1500&quality=82&strip=all&ssl=1";
 
   useEffect(() => {
-    isValidImage(url).then((isValid) => {
+    isValidImage(cover).then((isValid) => {
       if (isValid) {
         console.log("The link is a valid image link.");
       } else {
@@ -17,26 +19,23 @@ const PostImage = ({ cover }: any) => {
       }
     });
 
-    if (url) {
-      isValidImage(url).then(setIsValid);
+    if (cover) {
+      isValidImage(cover).then(setIsValid);
     }
-  }, [url]);
+  }, [cover]);
   // Example usage:
 
   // handle if the cover url not found or not loaded so here we will use a placeholder
   // old image <img className="rounded my-4 h-[400px]" src={url} />
   return (
     <div className="pr-6">
-      {isValid === null && <p>Checking...</p>}
       {isValid === true && (
-        <Image
-          src="https://images.unsplash.com/photo-1533167649158-6d508895b680?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt="Cover of the post"
-          width={500}
-          height={500}
+        <img
+          className="rounded my-4 w-full h-[400px]"
+          src={pathname === "/po" ? url : cover}
         />
       )}
-      {isValid === false && (
+      {(isValid === false || isValid === null) && (
         <div className="bg-sec rounded my-4 h-[400px] flex justify-center items-center">
           <div className="flex flex-col items-center">
             <FcRemoveImage className="text-4xl text-sec" />

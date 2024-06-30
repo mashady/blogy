@@ -5,7 +5,7 @@ interface PostSubjectProps {
   subject: any;
 }
 
-const PostSubject = ({ readMore, subject }: PostSubjectProps) => {
+const PostSubject = ({ readMore, subject, slug }: PostSubjectProps) => {
   return (
     <div className="mb-6">
       <article
@@ -18,7 +18,7 @@ const PostSubject = ({ readMore, subject }: PostSubjectProps) => {
       {readMore && (
         <div className=" flex justify-center items-center">
           <Link
-            href="/"
+            href={`/posts/${slug}`}
             className="flex flex-col justify-center items-center my-4"
           >
             <FaPlus className="text-2xl cursor-pointer mb-2" />

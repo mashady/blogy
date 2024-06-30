@@ -1,59 +1,63 @@
+import prisma from "@/prisma/client";
 import Link from "next/link";
-import React from "react";
-// will be replaced with props
-const fakePosts = [
-  {
-    title:
-      "Siri in iOS 18: An AI revolution, or a sometimes useful dumpster fire?",
-    cover:
-      "https://i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2024/04/find-my-repair.jpg",
-    author: "Zac Hall",
-    date: "Apr 1 2024",
-  },
-  {
-    title:
-      "Siri in iOS 18: An AI revolution, or a sometimes useful dumpster fire?",
-    cover:
-      "https://i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2024/04/find-my-repair.jpg",
-    author: "Zac Hall",
-    date: "Apr 1 2024",
-  },
-  {
-    title:
-      "Siri in iOS 18: An AI revolution, or a sometimes useful dumpster fire?",
-    cover:
-      "https://i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2024/04/find-my-repair.jpg",
-    author: "Zac Hall",
-    date: "Apr 1 2024",
-  },
-];
+import React, { cache } from "react";
+import { formatDate } from "@/lib/formatDate";
+import FeaturePostImage from "./FeaturePostImage";
+
 // this will be change to posts collection
-const FeaturePost = ({ postsTitle, posts }: any) => {
+const FeaturePost = async ({ postsTitle, posts }: any) => {
+  const fetchPosts = await prisma.post.findMany({
+    orderBy: { createdAt: "desc" },
+    skip: 1,
+    take: 3,
+    include: {
+      assignedToUser: true,
+    },
+  });
+  const transformedPosts = fetchPosts.map((p) => ({
+    ...p,
+    createdAt: formatDate(p.createdAt),
+    assignedToUser: {
+      id: p?.assignedToUser?.id,
+      name: p?.assignedToUser?.name,
+      email: p?.assignedToUser?.email,
+    },
+  }));
   return (
     <div>
-      <h1 className="text-4xl font-bold mt-[3rem] capitalize">{postsTitle}</h1>
-      {fakePosts.map((post, i) => {
+      <h1 className="text-4xl font-bold mt-[2rem] capitalize">{postsTitle}</h1>
+      {transformedPosts.map((post, i) => {
         return (
           <div key={i} className={i === 1 ? "border-y-[1px]" : ""}>
-            <div className="flex mt-4 pb-2">
-              <figure className="mr-4">
-                <img
-                  src="https://i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2024/04/find-my-repair.jpg"
-                  alt="image of the post"
-                  className="w-[350px] cursor-pointer"
-                />
-              </figure>
+            <div className="flex mt-2 pb-2">
+              <Link href={`/posts/${post?.slug}`}>
+                <FeaturePostImage cover={post?.cover} />
+                {/**
+                 * 
+                 * <figure className="mr-4">
+                  <img
+                    src={post?.cover}
+                    alt="image of the post"
+                    className="w-[200px] h-[100px] cursor-pointer rounded object-cover"
+                  />
+                </figure>
+                 * 
+                 * 
+                 */}
+              </Link>
+
               <div>
-                <h3 className="font-semibold text-[16px] cursor-pointer hover:underline">
-                  Siri in iOS 18: An AI revolution, or a sometimes useful
-                  dumpster fire?
+                <h3 className="font-semibold text-[16px] cursor-pointer hover:underline capitalize">
+                  {post?.title}
                 </h3>
                 <div className="text-[0.9rem]">
                   <span className="font-semibold text-[#1f4d78]  hover:text-[#1f4d78] hover:underline transition-all">
-                    <Link href="">Zac Hall</Link>
+                    <Link href={`/profile/${post?.assignedToUser?.id}`}>
+                      {post?.assignedToUser?.name}
+                    </Link>
                   </span>
                   <span className="mx-2">|</span>
-                  <span className="font-semibold">Apr 1 2024</span>
+                  <span className="font-semibold">{post?.createdAt}</span>
                 </div>
               </div>
             </div>

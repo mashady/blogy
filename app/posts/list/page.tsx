@@ -10,20 +10,30 @@ const Post = async ({ searchParams }: any) => {
     where: {
       section: searchParams.section,
     },
+    include: {
+      assignedToUser: true,
+    },
   });
-  if (posts.length === 0) notFound();
+  const transformedPosts = posts.map((post) => ({
+    ...post,
+    assignedToUser: {
+      id: post?.assignedToUser?.id,
+      name: post?.assignedToUser?.name,
+      email: post?.assignedToUser?.email,
+    },
+  }));
+  if (transformedPosts.length === 0) notFound();
   return (
     /** create the list issues */
+    /** this comment just for tsting pusrpos */
     <MaxWidthWrapper>
-      {JSON.stringify(posts.length)}
       <div className="grid grid-cols-1 lg:grid-cols-3">
         <div className="col-span-2">
-          <h1 className="text-4xl font-bold capitalize mt-[3rem] mb-2 ">
-            {searchParams.section}
-          </h1>
-          <LatestPost />
-          <LatestPost />
-          <LatestPost />
+          {transformedPosts?.map((post, i) => (
+            <div key={i}>
+              <LatestPost post={post} />
+            </div>
+          ))}
         </div>
         <FeaturePost />
       </div>

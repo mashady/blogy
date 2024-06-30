@@ -30,7 +30,7 @@ const ProfilePicture = ({ url, imageStyle, placeholderStyle }: any) => {
       {isValid === false ||
         (isValid === null && (
           <div className={placeholderStyle}>
-            <div className="">
+            <div className="flex flex-col items-center">
               <RxAvatar
                 className={`${
                   pathname.includes("/posts")

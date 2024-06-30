@@ -42,6 +42,12 @@ const PostForm = ({ post, postTags }: any) => {
 
   const onSubmit = handleSubmit(async (data, e) => {
     try {
+      // handle images upload
+      const modifiedData = {
+        ...data,
+        title: "static content",
+      };
+      console.log(modifiedData);
       setSubmitting(true);
       if (post) await axios.patch("/api/posts" + post.id, data);
       else await axios.post("/api/posts", data);
@@ -165,7 +171,6 @@ const PostForm = ({ post, postTags }: any) => {
             <ErrorMessage message={errors.description?.message as string} />
           )}
           {errors.user?.message}
-          {JSON.stringify(errors)}
           <button
             className="flex items-center justify-center gap-3 bg-[#1f4d78] text-white rounded w-[100px] h-[50px] px-4"
             disabled={isSubmitting}

@@ -16,8 +16,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { logout } from "@/actions/logout";
+import { useCurrentUser } from "./hooks/useCurrentUser";
 
 export function UserButton() {
+  const user = useCurrentUser();
   const handleLogOut = () => {
     logout();
   };
@@ -32,15 +34,15 @@ export function UserButton() {
       <DropdownMenuContent className="w-56">
         <ul className="p-2 space-y-2 capitalize">
           <li>
-            <Link href="profile">profile</Link>
+            <Link href={`/profile/${user?.id}`}>profile</Link>
           </li>
           <DropdownMenuSeparator />
           <li>
-            <Link href="settings/profile">settings</Link>
+            <Link href="/settings/profile">settings</Link>
           </li>
           <DropdownMenuSeparator />
           <li>
-            <Link href="new-post">New Post</Link>
+            <Link href="/new-post">New Post</Link>
           </li>
           <DropdownMenuSeparator />
 

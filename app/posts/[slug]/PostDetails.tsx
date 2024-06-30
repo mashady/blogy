@@ -9,7 +9,7 @@ import { LiaComments } from "react-icons/lia";
 import { FcRemoveImage } from "react-icons/fc";
 import ProfilePicture from "@/app/_components/ProfilePicture";
 import { formatDate } from "@/lib/formatDate";
-const PostDetails = ({ post, userName, userImage, postDate }: any) => {
+const PostDetails = ({ post, userId, userName, userImage, postDate }: any) => {
   const formattedDate = formatDate(postDate);
   /**
    *   const [validImage, setIsValidImage] = useState<any>(null);
@@ -56,8 +56,8 @@ const PostDetails = ({ post, userName, userImage, postDate }: any) => {
         />
       </div>
       <div className="text-[0.9rem]">
-        <span className="font-semibold capitalize  hover:text-[#1f4d78] hover:underline transition-all">
-          <Link href="" className="text-lite-sec">
+        <span className="font-semibold capitalize hover:text-[#1f4d78] hover:underline transition-all">
+          <Link href={`/profile/${userId}`} className="text-lite-sec">
             {userName}
           </Link>
         </span>

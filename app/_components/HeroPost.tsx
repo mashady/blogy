@@ -4,9 +4,9 @@ import Link from "next/link";
 
 const HeroPost = () => {
   return (
-    <div className="col-span-2">
+    <div className="col-span-2 mt-6">
       <div className="text-center">
-        <PostImage />
+        <PostImage cover="https://i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2024/04/siri-dumpster-fire-1.jpg?w=1500&quality=82&strip=all&ssl=1" />
         <PostTags />
         <h1 className="font-semibold text-2xl md:text-4xl cursor-pointer  mb-6">
           Siri in iOS 18: An AI revolution, or a sometimes useful dumpster fire?

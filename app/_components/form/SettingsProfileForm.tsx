@@ -121,7 +121,6 @@ const SettingsProfileForm = ({ user }: any) => {
         <h2 className="text-xl capitalize mt-4">Basics info</h2>
         <span className="text-[0.95rem]">Tell us about your basics info</span>
       </div>
-      {JSON.stringify(session.data?.user)}
       <Form {...form}>
         <form
           className="w-[300px] space-y-4 pb-4"

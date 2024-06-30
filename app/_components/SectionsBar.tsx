@@ -28,11 +28,11 @@ const SECTION_LINKS: any = [
   },
   {
     name: "Apple store",
-    link: "apple-store",
+    link: "applestore",
   },
   {
     name: "Apple One",
-    link: "apple-one",
+    link: "appleone",
   },
 ];
 
@@ -46,7 +46,7 @@ const SectionsBar = () => {
               {SECTION_LINKS.map((section: any) => (
                 <div key={section.name} className="pr-[16px]">
                   <Link
-                    href={section.link}
+                    href={`/posts/list?section=${section.link}`}
                     className="text truncate text-[14px] md:text-[16px] hover:bg-opacity-50"
                   >
                     {section.name}
