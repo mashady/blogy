@@ -35,7 +35,6 @@ const Post = async ({ searchParams }: any) => {
             </div>
           ))}
         </div>
-        <FeaturePost />
       </div>
     </MaxWidthWrapper>
   );
