@@ -1,5 +1,5 @@
-"use server";
-
+"use server"; // what is the diffrent between server actions and APIs ?
+// prepare the google authentication and github authentication
 import { getPasswordResetTokenByToken } from "@/data/passwordResetToken";
 import { getUserByEmail } from "@/data/user";
 import prisma from "@/prisma/client";

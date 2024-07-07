@@ -1,6 +1,6 @@
 "use server";
 import bcrypt from "bcryptjs";
-
+// import
 import { getUserByEmail } from "@/data/user"; // handle fetch user by email.
 import { RegisterSchema } from "@/scemas";
 import prisma from "@/prisma/client";

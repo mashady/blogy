@@ -5,7 +5,6 @@ import prisma from "@/prisma/client";
 import { getUserById } from "./data/user";
 import { getTwoFactorConfirmationById } from "./data/twoFactorConfirmation";
 import { getAccountByUserId } from "./data/account";
-import { isRedirectError } from "next/dist/client/components/redirect";
 
 /**
  * ### back to this file soon
