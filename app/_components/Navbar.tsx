@@ -11,16 +11,21 @@ import { useSession } from "next-auth/react";
 import { useCurrentUser } from "./hooks/useCurrentUser";
 
 const Navbar = ({ xuser }: any) => {
-  const user = useCurrentUser();
-
-  const { data: session, status } = useSession();
+  const userxxx = useCurrentUser();
+  console.log(userxxx);
+  const session = useSession();
+  console.log(session.data?.user);
   const pathname = usePathname();
-  const [currentUser, setCurrentUser] = useState<any>(user);
+  const [currentUser, setCurrentUser] = useState<any>(userxxx);
   useEffect(() => {
-    if (user) {
-      setCurrentUser(user);
+    if (xuser) {
+      setCurrentUser(xuser);
+      console.log("user is");
+      console.log(userxxx);
+      console.log("current user is ");
+      console.log(currentUser);
     }
-  }, [user]);
+  }, []);
   return (
     <>
       {pathname === "/settings" || pathname.includes("/settings") ? null : (
@@ -34,7 +39,7 @@ const Navbar = ({ xuser }: any) => {
                 <DarkMode />
                 {currentUser ? (
                   <>
-                    <UserButton />
+                    <UserButton user={currentUser} />
                   </>
                 ) : (
                   <>

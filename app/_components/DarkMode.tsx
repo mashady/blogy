@@ -1,13 +1,17 @@
+"use client";
 import React, { useEffect } from "react";
 import { IoMoon, IoSunny } from "react-icons/io5";
 
 const DarkMode = () => {
   const [dark, setDark] = React.useState(false);
+  const [strorage, setStorage] = React.useState<any>(null);
+  const ISSERVER = typeof window === "undefined";
   // todo create the checker method
-  let lalal = localStorage.getItem("dark");
+  let dMOde = localStorage.getItem("dark");
+
   // console.log(lalal);
   useEffect(() => {
-    if (lalal === "darkMode") {
+    if (dMOde === "darkMode") {
       setDark(true);
       //console.log("lalal dark mode");
       document.body.classList.add("dark");

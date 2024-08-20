@@ -74,6 +74,29 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 50vh;
+    background: #1f4d78;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: hwb(209 26% 23%);
+    border-radius: 50vh;
+    border: 1px solid #f6f7ed;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #1f4d78;
+  }
+}
+
 body.dark
   #simplemde-editor-2-wrapper
   > div

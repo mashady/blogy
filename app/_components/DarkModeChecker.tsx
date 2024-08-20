@@ -2,9 +2,9 @@
 import React, { useEffect } from "react";
 
 const DarkModeChecker = () => {
-  let darkMode = localStorage.getItem("dark");
-
   useEffect(() => {
+    let darkMode = localStorage.getItem("dark");
+
     if (darkMode === "darkMode") {
       document.body.classList.add("dark");
       // Add styles to your specific class when dark mode is enabled
@@ -23,7 +23,7 @@ const DarkModeChecker = () => {
         editorWrapper.classList.remove("dark-mode-enabled");
       }
     }
-  }, [darkMode]);
+  }, []);
   return <div></div>;
 };
 

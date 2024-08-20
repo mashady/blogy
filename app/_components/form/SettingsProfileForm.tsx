@@ -30,6 +30,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { DashboardMenu } from "../DashboardMenu";
 
 export enum UserRole {
   ADMIN = "ADMIN",
@@ -113,9 +114,13 @@ const SettingsProfileForm = ({ user }: any) => {
   return (
     <div className="min-h-[100vh] pt-4 pl-4">
       <SettingsPageTitle pageName="profile" />
-      <div className="mt-2 py-6 border-b-[1px] border-[#ffffff2e]">
-        <h1 className="text-2xl capitalize">profile</h1>
-        <span className="text-[0.95rem]">Manage your profile settings</span>
+      <div className="mt-2 py-6 border-b-[1px] border-[#ffffff2e] flex justify-between">
+        <div>
+          <h1 className="text-2xl capitalize">profile</h1>
+          <span className="text-[0.95rem]">Manage your profile settings</span>
+        </div>
+
+        <DashboardMenu />
       </div>
       <div className="mb-4">
         <h2 className="text-xl capitalize mt-4">Basics info</h2>

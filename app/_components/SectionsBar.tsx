@@ -38,7 +38,7 @@ const SECTION_LINKS: any = [
 
 const SectionsBar = () => {
   return (
-    <div className="bg-sec py-2 text-white overflow-hidden">
+    <div className="bg-sec py-2 text-white overflow-x-scroll scrollbar pt-[15px]">
       <div className="max-w-[1280px] mx-auto px-4">
         <div className="">
           <div className=" flex justify-between items-center">

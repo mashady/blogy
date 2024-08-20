@@ -27,7 +27,7 @@ const Profile = ({ user }) => {
     <MaxWidthWrapper>
       <div className="relative">
         <div className="w-full h-[200px] bg-sec rounded"></div>
-        <Avatar className="w-[150px] h-[150px] absolute bottom-[-65px] ml-10 border-4">
+        <Avatar className="w-[80px] h-[80px] md:w-[150px] md:h-[150px] absolute bottom-[-30px] md:bottom-[-65px] ml-10 border-4">
           <AvatarFallback>
             {/**
              * <AvatarImage src="" />
@@ -43,33 +43,17 @@ const Profile = ({ user }) => {
           </AvatarFallback>
         </Avatar>
       </div>
-      <div className="ml-[200px] mt-2 flex justify-between">
+      <div className="mt-10 md:ml-[200px] md:mt-2 flex justify-between">
         <div>
-          <h1 className="text-lg font-semibold uppercase">@{user?.name}</h1>
-          <span className="text-[0.9rem]">{user?.email}</span>
+          <h1 className="text md:text-lg font-semibold uppercase">
+            @{user?.name}
+          </h1>
+          <span className="text md:text-[0.9rem]">{user?.email}</span>
         </div>
         <div className="flex justify-center items-center">
           <Button variant="sec" className="mr-2">
             Add Post
           </Button>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button className=" " variant="lightOpcaity">
-                <HiDotsHorizontal className="text-xl" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56">
-              <ul className="p-2 space-y-2 capitalize">
-                <li>
-                  <Link href="profile">profile</Link>
-                </li>
-                <DropdownMenuSeparator />
-                <li>
-                  <Link href="settings/profile">setting</Link>
-                </li>
-              </ul>
-            </DropdownMenuContent>
-          </DropdownMenu>
         </div>
       </div>
       <div className="mb-4">

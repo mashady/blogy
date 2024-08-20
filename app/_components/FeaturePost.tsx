@@ -29,7 +29,7 @@ const FeaturePost = async ({ postsTitle, posts }: any) => {
       {transformedPosts.map((post, i) => {
         return (
           <div key={i} className={i === 1 ? "border-y-[1px]" : ""}>
-            <div className="flex mt-2 pb-2">
+            <div className="flex flex-col md:flex-row mt-2 pb-2 w-[300px] md:w-full">
               <Link href={`/posts/${post?.slug}`}>
                 <FeaturePostImage cover={post?.cover} />
                 {/**

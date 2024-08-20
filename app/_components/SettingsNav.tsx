@@ -15,7 +15,7 @@ let fakeList = [
 const SettingsNav = () => {
   let pathname = usePathname();
   return (
-    <nav className="bg-sec w-[250px]">
+    <nav className="bg-sec w-[250px] hidden md:flex">
       <div className="fixed top-0 left-0 bg-sec h-full w-[250px] px-6">
         <div className="">
           <div className="flex items-center my-4">

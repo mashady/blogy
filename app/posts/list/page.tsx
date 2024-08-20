@@ -22,7 +22,11 @@ const Post = async ({ searchParams }: any) => {
       email: post?.assignedToUser?.email,
     },
   }));
-  if (transformedPosts.length === 0) notFound();
+  if (posts.length === 0) {
+    console.log("list not found");
+    console.log(posts);
+    // handle error message
+  }
   return (
     /** create the list issues */
     /** this comment just for tsting pusrpos */

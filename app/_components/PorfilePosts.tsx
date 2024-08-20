@@ -5,6 +5,7 @@ import axios from "axios";
 import { Post } from "@prisma/client";
 import { formatDate } from "@/lib/formatDate";
 import ProfilePostsImage from "./ProfilePostsImage";
+import Skeleton from "./Skeleton";
 const PorfilePosts = ({ id }: any) => {
   const {
     data: userPosts,
@@ -16,7 +17,23 @@ const PorfilePosts = ({ id }: any) => {
     staleTime: 60 * 10000, // means the time takes to not consider the cashing
     retry: 3, // another three tries if there an error
   });
-  if (isLoading) return <div>loading....</div>;
+  if (isLoading)
+    return (
+      <div>
+        <div className="mb-6 max-w-[1280px] mx-auto px-4 mt-8">
+          <Skeleton
+            width="600px"
+            height="200px"
+            style={{ marginBottom: "5px" }}
+          />
+          <Skeleton
+            width="600px"
+            height="200px"
+            style={{ marginBottom: "5px" }}
+          />
+        </div>
+      </div>
+    );
 
   return (
     <div>

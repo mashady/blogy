@@ -3,7 +3,7 @@
 import * as React from "react";
 import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
 import { IoLogOutOutline } from "react-icons/io5";
-import { FaUserCircle } from "react-icons/fa"; // user icon
+import { MdOutlineMenu } from "react-icons/md";
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -18,8 +18,8 @@ import {
 import { logout } from "@/actions/logout";
 import { useCurrentUser } from "./hooks/useCurrentUser";
 
-export function UserButton({ user }: any) {
-  //const user = useCurrentUser();
+export function DashboardMenu() {
+  const user = useCurrentUser();
   const handleLogOut = () => {
     logout();
   };
@@ -27,8 +27,8 @@ export function UserButton({ user }: any) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="sec" className="text-red-300">
-          <FaUserCircle className="text-xl text-white" />
+        <Button variant="sec" className="text-red-300 flex md:hidden mr-4">
+          <MdOutlineMenu className="text-xl text-white" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">

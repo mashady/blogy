@@ -67,7 +67,8 @@ export const {
         session.user.email = token.email;
         session.user.isOAuth = token.isOAuth;
       }
-
+      console.log("session");
+      console.log(session);
       // Ensure the session callback returns a session object
       return session;
     },
